@@ -24,6 +24,10 @@ public class JeuDeLaVie {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		if(args.length == 0){
+			help();
+			System.exit(1);
+		}
 		switch(args[0]){
 		case "-name": name(); break;
 		default: help();
