@@ -26,6 +26,7 @@ public class JeuDeLaVie {
 		LIFE life = new LIFE();
 		System.out.println(life);
 		life.debug();
+		DisplayVT100.show(life);
 	}
 	
 	/**

@@ -2,6 +2,7 @@ package life;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 
 public class LIFE {
 	protected Integer x; // horizontal position
@@ -11,6 +12,12 @@ public class LIFE {
 	protected Float   d; // density
 	protected ArrayList<Coord> raw; // list of living cell
 	protected ArrayList<LIFE> shards;// list of LIFE composing this one
+	public Integer x(){ return x; }
+	public Integer y(){ return y; }
+	public Integer w(){ return w; }
+	public Integer h(){ return h; }
+	public Float   d(){ return d; }
+	public Iterator<Coord> raw(){ return raw.iterator(); }
 	
 	private void update(){
 		x = Collections.min(raw, new Coord.compareX() ).x();
@@ -36,7 +43,8 @@ public class LIFE {
 	}
 	public void debug(){
 		for(Coord i: raw){
-			System.out.println("["+i.x()+":"+i.y()+"]");
+			System.out.print("["+i.x()+":"+i.y()+"]  ");
 		}
+		System.out.println();
 	}
 }
