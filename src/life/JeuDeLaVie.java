@@ -23,8 +23,7 @@ public class JeuDeLaVie {
 	
 	public static void simulate(Integer max, String filename){
 		System.out.println(filename+" for "+max+" turns.");
-		LIFE life = new LIFE();
-		System.out.println(life);
+		LIFE life = Loader.read(filename);
 		life.debug();
 		DisplayVT100.show(life);
 	}
