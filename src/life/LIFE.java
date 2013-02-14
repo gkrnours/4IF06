@@ -26,6 +26,11 @@ public class LIFE {
 		h = Collections.max(raw, new Coord.compareY() ).y()-y+1;
 		d = (float)(raw.size()/(1.*w*h));
 	}
+	public LIFE(ArrayList<Coord> cells){
+		raw = cells;
+		Collections.sort(raw);
+		update();
+	}
 	public LIFE(){
 		raw = new ArrayList<Coord>();
 		raw.add(new Coord(0,1));
