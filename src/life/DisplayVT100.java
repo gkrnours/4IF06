@@ -3,9 +3,14 @@ package life;
 import java.util.Iterator;
 
 public class DisplayVT100 {
-	public static String[] utf8 = {"▢","▣", "░","▓", "◇","◈", "☐","☒"};
-	public static void show(LIFE life){
-		int style = 4;
+	protected LIFE life;
+	
+	public DisplayVT100(LIFE life){
+		this.life = life;
+	}
+	public static String[] utf8 = {".","#", "▢","▣", "░","▓", "◇","◈", "☐","☒"};
+	public void show(){
+		int style = 0;
 		Iterator<Coord> raw = life.raw();
 		Coord next = (raw.hasNext())?raw.next():null;
 		

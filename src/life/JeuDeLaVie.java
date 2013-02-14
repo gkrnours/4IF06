@@ -12,7 +12,7 @@ public class JeuDeLaVie {
 	
 	private static void name(){
 		String[] msg = {
-			"Ibliis",
+			"Baptiste Chartier",
 			"Jimmy Lourenço",
 			"ludovic coues",
 			"startrockque"
@@ -23,10 +23,10 @@ public class JeuDeLaVie {
 	
 	public static void simulate(Integer max, String filename){
 		System.out.println(filename+" for "+max+" turns.");
-		LIFE life = new LIFE();
-		System.out.println(life);
+		LIFE life = Loader.read(filename);
+		DisplayVT100 display = new DisplayVT100(life);
 		life.debug();
-		DisplayVT100.show(life);
+		display.show();
 	}
 	
 	/**
