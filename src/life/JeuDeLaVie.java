@@ -44,7 +44,7 @@ public class JeuDeLaVie {
 			simulate(max, args[2]); 
 			break;
 		case "-c": // analyse a setup in X turn or less
-			// TODO analyse file
+			// TODO try to analyse file
 			break;
 		case "-w": // analyse all setup in a directory in X turn or less
 			// TODO analyse folder
