@@ -13,7 +13,7 @@ public class JeuDeLaVie {
 	private static void name(){
 		String[] msg = {
 			"Ibliis",
-			"iTzamma",
+			"Jimmy Lourenço",
 			"ludovic coues",
 			"startrockque"
 		};
