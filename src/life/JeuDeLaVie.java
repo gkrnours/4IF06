@@ -24,7 +24,7 @@ public class JeuDeLaVie {
 	public static void simulate(Integer max, String filename){
 		System.out.println(filename+" for "+max+" turns.");
 		LIFE life = Loader.read(filename);
-		DisplayVT100 display = new DisplayVT100(life);
+		Display display = new DisplayVT100(life);
 		life.debug();
 		display.show();
 	}
