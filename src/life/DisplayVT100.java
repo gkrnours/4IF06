@@ -2,12 +2,12 @@ package life;
 
 import java.util.Iterator;
 
-public class DisplayVT100 {
-	protected LIFE life;
+public class DisplayVT100 extends Display{
 	
-	public DisplayVT100(LIFE life){
-		this.life = life;
+	public DisplayVT100(LIFE life) {
+		super(life);
 	}
+	
 	public static String[] utf8 = {".","#", "▢","▣", "░","▓", "◇","◈", "☐","☒"};
 	public void show(){
 		int style = 0;
