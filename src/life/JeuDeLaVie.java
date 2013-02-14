@@ -12,7 +12,7 @@ public class JeuDeLaVie {
 	
 	private static void name(){
 		String[] msg = {
-			"Baptiste Chartier le big boss",
+			"Baptiste Chartier",
 			"iTzamma",
 			"ludovic coues",
 			"startrockque"
