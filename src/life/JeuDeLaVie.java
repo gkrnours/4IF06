@@ -15,7 +15,7 @@ public class JeuDeLaVie {
 			"Baptiste Chartier",
 			"Jimmy Lourenço",
 			"ludovic coues",
-			"startrockque"
+			"startrockque la coquine"
 		};
 		for(String line: msg) System.out.println(line);
 	}
