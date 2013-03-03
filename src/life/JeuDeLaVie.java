@@ -1,5 +1,7 @@
 package life;
 
+import java.util.Scanner;
+
 public class JeuDeLaVie {
 	private static void help(){
 		String[] msg = {

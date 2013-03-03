@@ -6,9 +6,9 @@ import net.slashie.libjcsi.CSIColor;
 import net.slashie.libjcsi.ConsoleSystemInterface;
 import net.slashie.libjcsi.jcurses.JCursesConsoleInterface;
 
-public class DisplayVT100 extends Display{
+public class DisplaySwingTerm extends Display{
 	private ConsoleSystemInterface csi;
-	public DisplayVT100(LIFE life) {
+	public DisplaySwingTerm(LIFE life) {
 		super(life);
 	}
 	
@@ -20,7 +20,7 @@ public class DisplayVT100 extends Display{
 	}
 	
 	public void update(){
-		int style = 0;
+		int style = 4;
 		Iterator<Coord> raw = life.raw();
 		Coord next = (raw.hasNext())?raw.next():null;
 		csi.cls();
