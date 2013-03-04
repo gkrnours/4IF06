@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import net.slashie.libjcsi.CSIColor;
 import net.slashie.libjcsi.ConsoleSystemInterface;
-import net.slashie.libjcsi.jcurses.JCursesConsoleInterface;
+import net.slashie.libjcsi.wswing.WSwingConsoleInterface;
 
 public class DisplaySwingTerm extends Display{
 	private ConsoleSystemInterface csi;
@@ -14,7 +14,7 @@ public class DisplaySwingTerm extends Display{
 	
 	public static String[] utf8 = {".","#", "▢","▣", " ","▓", "◇","◈", "☐","☒"};
 	public void show(){
-		csi = new JCursesConsoleInterface();
+		csi = new WSwingConsoleInterface("Life");
 		csi.cls();
 		update();
 	}
@@ -28,7 +28,7 @@ public class DisplaySwingTerm extends Display{
 		for(int y=life.y(), yp=y+life.h(), dy=-y; y<yp; ++y){
 			for(int x=life.x(), xp=x+life.w(), dx = -x; x<xp; ++x){
 				if(next!=null && next.isAt(x,y)){
-					csi.print(x+dx, y+dy, utf8[1+style], CSIColor.CARMINE);
+					csi.print(x+dx, y+dy, utf8[1+style], CSIColor.CELADON);
 					next = (raw.hasNext())?raw.next():null;
 				} else {
 					csi.print(x+dx, y+dy, utf8[0+style], CSIColor.CELADON);
