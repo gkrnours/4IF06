@@ -6,4 +6,5 @@ public abstract class Display {
 		this.life = life;
 	}
 	public abstract void show();
+	public abstract void update();
 }
