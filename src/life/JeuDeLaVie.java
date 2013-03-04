@@ -1,5 +1,7 @@
 package life;
 
+import java.util.Scanner;
+
 public class JeuDeLaVie {
 	private static void help(){
 		String[] msg = {
@@ -24,7 +26,7 @@ public class JeuDeLaVie {
 	public static void simulate(Integer max, String filename){
 		System.out.println(filename+" for "+max+" turns.");
 		LIFE life = Loader.read(filename);
-		Display display = new DisplayVT100(life);
+		Display display = new DisplaySwingTerm(life);
 		life.debug();
 		display.show();
 	}
