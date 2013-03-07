@@ -9,6 +9,9 @@ implements Comparable<Coord> {
 	public Integer x(){ return x; }
 	public Integer y(){ return y; }
 
+	public boolean equals(Coord o){
+		return o.x() == x && o.y() == x;
+	}
 	@Override
 	public int compareTo(Coord other) {
 		if(y.equals(other.y()))
