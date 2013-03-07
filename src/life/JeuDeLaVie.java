@@ -17,7 +17,7 @@ public class JeuDeLaVie {
 			"Baptiste Chartier",
 			"Jimmy Lourenço",
 			"ludovic coues",
-			"startrockque la coquine"
+			"Fabien Roume"
 		};
 		for(String line: msg) System.out.println(line);
 	}
@@ -46,7 +46,7 @@ public class JeuDeLaVie {
 			simulate(max, args[2]); 
 			break;
 		case "-c": // analyse a setup in X turn or less
-			// TODO try to analyse file
+			// TODO analyse file
 			break;
 		case "-w": // analyse all setup in a directory in X turn or less
 			// TODO analyse folder
@@ -55,5 +55,3 @@ public class JeuDeLaVie {
 		}
 	}
 }
-
-
