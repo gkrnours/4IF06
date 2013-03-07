@@ -1,8 +1,6 @@
 package life;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
+import java.util.*;
 
 public class LIFE implements Iterator {
 	protected Integer x; // horizontal position
@@ -51,6 +49,9 @@ public class LIFE implements Iterator {
 		update();
 	}
 
+	public Set<Cellule> recupererVoisinage(Cellule c){
+		Set<Cellule> s=new HashSet<Cellule>();
+	}
 	public boolean existe(Coord c){
 		return this.raw.contains(c);
 	}

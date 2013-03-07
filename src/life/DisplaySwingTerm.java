@@ -21,7 +21,7 @@ public class DisplaySwingTerm extends Display{
 	
 	public void update(){
 		int style = 0;
-		Iterator<Coord> raw = life.raw();
+		Iterator<Cellule> raw = life.raw();
 		Coord next = (raw.hasNext())?raw.next():null;
 		csi.cls();
 		
