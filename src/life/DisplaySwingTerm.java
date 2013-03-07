@@ -20,7 +20,7 @@ public class DisplaySwingTerm extends Display{
 	}
 	
 	public void update(){
-		int style = 4;
+		int style = 0;
 		Iterator<Coord> raw = life.raw();
 		Coord next = (raw.hasNext())?raw.next():null;
 		csi.cls();
@@ -28,10 +28,10 @@ public class DisplaySwingTerm extends Display{
 		for(int y=life.y(), yp=y+life.h(), dy=-y; y<yp; ++y){
 			for(int x=life.x(), xp=x+life.w(), dx = -x; x<xp; ++x){
 				if(next!=null && next.isAt(x,y)){
-					csi.print(x+dx, y+dy, utf8[1+style], CSIColor.CELADON);
+					csi.print(x+dx, y+dy, utf8[1+style], CSIColor.FUCSHIA_PINK);
 					next = (raw.hasNext())?raw.next():null;
 				} else {
-					csi.print(x+dx, y+dy, utf8[0+style], CSIColor.CELADON);
+					csi.print(x+dx, y+dy, utf8[0+style], CSIColor.ALICE_BLUE);
 				}
 			}
 		}
