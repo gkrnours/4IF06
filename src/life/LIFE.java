@@ -10,7 +10,7 @@ public class LIFE implements Iterator {
 	protected Integer w; // width
 	protected Integer h; // height
 	protected Float d; // density
-	protected ArrayList<Coord> raw; // list of living cell
+	protected ArrayList<Cellule> raw; // list of living cell
 	protected ArrayList<LIFE> shards;// list of LIFE composing this one
 
 	public Integer x() {
@@ -33,7 +33,7 @@ public class LIFE implements Iterator {
 		return d;
 	}
 
-	public Iterator<Coord> raw() {
+	public Iterator<Cellule> raw() {
 		return raw.iterator();
 	}
 
@@ -45,21 +45,21 @@ public class LIFE implements Iterator {
 		d = (float) (raw.size() / (1. * w * h));
 	}
 
-	public LIFE(ArrayList<Coord> cells) {
+	public LIFE(ArrayList<Cellule> cells) {
 		raw = cells;
 		Collections.sort(raw);
 		update();
 	}
 
 	public LIFE() {
-		raw = new ArrayList<Coord>();
-		raw.add(new Coord(0, 1));
-		raw.add(new Coord(1, 1));
-		raw.add(new Coord(6, 0));
-		raw.add(new Coord(1, 2));
-		raw.add(new Coord(5, 2));
-		raw.add(new Coord(7, 2));
-		raw.add(new Coord(6, 2));
+		raw = new ArrayList<Cellule>();
+		raw.add(new Cellule(0, 1));
+		raw.add(new Cellule(1, 1));
+		raw.add(new Cellule(6, 0));
+		raw.add(new Cellule(1, 2));
+		raw.add(new Cellule(5, 2));
+		raw.add(new Cellule(7, 2));
+		raw.add(new Cellule(6, 2));
 		Collections.sort(raw);
 		update();
 	}
