@@ -28,7 +28,7 @@ public class Loader {
 		Scanner tokens;
 		String line;
 		Integer x = null, y = null;
-		ArrayList<Coord> cells = new ArrayList<Coord>();
+		ArrayList<Cellule> cells = new ArrayList<Cellule>();
 		System.out.println(io);
 		if (!io.hasNext()) {
 			System.err.println("Empty file.");
