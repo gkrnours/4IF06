@@ -51,6 +51,9 @@ public class LIFE implements Iterator {
 		update();
 	}
 
+	public boolean existe(Coord c){
+		return this.raw.contains(c);
+	}
 	public LIFE() {
 		raw = new ArrayList<Cellule>();
 		raw.add(new Cellule(0, 1));
