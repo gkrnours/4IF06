@@ -29,6 +29,7 @@ public class JeuDeLaVie {
 		Display display = new DisplaySwingTerm(life);
 		life.debug();
 		display.show();
+		life.recupererVoisinage(new Cellule(0,0));
 	}
 	
 	/**
