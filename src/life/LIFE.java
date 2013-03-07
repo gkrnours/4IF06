@@ -51,6 +51,23 @@ public class LIFE implements Iterator {
 
 	public Set<Cellule> recupererVoisinage(Cellule c){
 		Set<Cellule> s=new HashSet<Cellule>();
+		s.add(c);
+		for(int x=0;x<2;x++){
+			for(int y=0;y<2;y++){
+				if(existe(new Coord(c.x()+x,c.y()+y))){
+					s.add(new Cellule(c.x()+x,c.y()+y));
+				}
+				if(existe(new Coord(c.x()-x,c.y()-y))){
+					s.add(new Cellule(c.x()-x,c.y()-y));
+				}if(existe(new Coord(c.x()+x,c.y()-y))){
+					s.add(new Cellule(c.x()+x,c.y()-y));
+				}if(existe(new Coord(c.x()-x,c.y()+y))){
+					s.add(new Cellule(c.x()-x,c.y()+y));
+				}
+			}
+		}
+		
+		return s;
 	}
 	public boolean existe(Coord c){
 		return this.raw.contains(c);
