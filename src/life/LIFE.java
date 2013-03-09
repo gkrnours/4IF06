@@ -48,39 +48,104 @@ public class LIFE implements Iterator {
 		Collections.sort(raw);
 		update();
 	}
-
-	public Set<Cellule> recupererVoisinage(Cellule c){
-		Set<Cellule> s=new HashSet<Cellule>();
-		s.add(c);
-		for(int x=0;x<2;x++){
-			for(int y=0;y<2;y++){
-				if(existe(new Coord(c.x()+x,c.y()+y))){
-					s.add(new Cellule(c.x()+x,c.y()+y));
-				}
-				if(existe(new Coord(c.x()-x,c.y()-y))){
-					s.add(new Cellule(c.x()-x,c.y()-y));
-				}if(existe(new Coord(c.x()+x,c.y()-y))){
-					s.add(new Cellule(c.x()+x,c.y()-y));
-				}if(existe(new Coord(c.x()-x,c.y()+y))){
-					s.add(new Cellule(c.x()-x,c.y()+y));
-				}
-			}
+	
+	//retourne la cellule donné en argument si elle existe dans raw, sinon en créé une.
+	public Cellule donneCellule(Cellule c){
+		if(existe(c)){
+			return c;
 		}
-		
+		else return new Cellule(c.x(),c.y());
+	}
+	
+	public Set<Cellule> recupererVoisinage(Cellule c) {
+		Set<Cellule> s = new HashSet<Cellule>();
+		s.add(c);
+		s.add(new Cellule(c.x()-1,c.y()-1));
+		s.add(new Cellule(c.x(),c.y()-1));
+		s.add(new Cellule(c.x()+1,c.y()-1));
+		s.add(new Cellule(c.x()-1,c.y()));
+		s.add(new Cellule(c.x()+1,c.y()));
+		s.add(new Cellule(c.x()-1,c.y()+1));
+		s.add(new Cellule(c.x(),c.y()+1));
+		s.add(new Cellule(c.x()+1,c.y()+1));
+		/*for (Cellule cel : raw) {
+			if (cel.x() == c.x() - 1 && cel.y() == c.y() - 1) {
+				s.add(cel);
+			}
+			if (cel.x() == c.x() && cel.y() == c.y() - 1) {
+				s.add(cel);
+			}
+			if (cel.x() == c.x() + 1 && cel.y() == c.y() - 1) {
+				s.add(cel);
+			}
+			if (cel.x() == c.x() - 1 && cel.y() == c.y()) {
+				s.add(cel);
+			}
+			if (cel.x() == c.x() + 1 && cel.y() == c.y()) {
+				s.add(cel);
+			}
+			if (cel.x() == c.x() - 1 && cel.y() == c.y() + 1) {
+				s.add(cel);
+			}
+			if (cel.x() == c.x() && cel.y() == c.y() + 1) {
+				s.add(cel);
+			}
+			if (cel.x() == c.x() + 1 && cel.y() == c.y() + 1) {
+				s.add(cel);
+			}
+		}*/
+
 		return s;
 	}
-	public boolean existe(Coord c){
+
+	public boolean alive(Cellule c) {
+		int cmpt = 0;
+		Set<Cellule> hs = recupererVoisinage(c);
+		if (c instanceof Vivante) {
+			for (Cellule cel : hs) {
+				if (!(cel.equals(c))) {
+					if (cel instanceof Vivante) {
+						cmpt++;
+					}
+				}
+			}
+			return (cmpt == 2 || cmpt == 3);
+		} else {
+			for (Cellule cel : hs) {
+				if (!(cel.equals(c))) {
+					if (cel instanceof Vivante) {
+						cmpt++;
+					}
+				}
+			}
+			return (cmpt == 3);
+		}
+
+	}
+
+	public void unTour() {
+		ArrayList<Cellule> al = new ArrayList<Cellule>();
+		for (Cellule c : this.raw) {
+			if (alive(c)) {
+				al.add(new Vivante(c.x(), c.y()));
+			} else
+				al.add(new Morte(c.x(), c.y()));
+		}
+	}
+
+	public boolean existe(Coord c) {
 		return this.raw.contains(c);
 	}
+
 	public LIFE() {
 		raw = new ArrayList<Cellule>();
-		raw.add(new Cellule(0, 1));
-		raw.add(new Cellule(1, 1));
-		raw.add(new Cellule(6, 0));
-		raw.add(new Cellule(1, 2));
-		raw.add(new Cellule(5, 2));
-		raw.add(new Cellule(7, 2));
-		raw.add(new Cellule(6, 2));
+		raw.add(new Vivante(0, 1));
+		raw.add(new Vivante(1, 1));
+		raw.add(new Vivante(6, 0));
+		raw.add(new Vivante(1, 2));
+		raw.add(new Vivante(5, 2));
+		raw.add(new Vivante(7, 2));
+		raw.add(new Vivante(6, 2));
 		Collections.sort(raw);
 		update();
 	}
@@ -96,8 +161,13 @@ public class LIFE implements Iterator {
 		System.out.println();
 	}
 
-	public boolean hasNext() { return true; }
-	public void remove() {}
+	public boolean hasNext() {
+		return true;
+	}
+
+	public void remove() {
+	}
+
 	public Object next() {
 		// TODO Auto-generated method stub
 		return null;
