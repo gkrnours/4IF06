@@ -123,13 +123,22 @@ public class LIFE implements Iterator {
 
 	}
 
+	
 	public void unTour() {
 		ArrayList<Cellule> al = new ArrayList<Cellule>();
+		Set<Cellule> s=new HashSet<Cellule>();
 		for (Cellule c : this.raw) {
 			if (alive(c)) {
 				al.add(new Vivante(c.x(), c.y()));
 			} else
 				al.add(new Morte(c.x(), c.y()));
+			s=recupererVoisinage(c);
+			for(Cellule cel: s){
+				if (alive(c)) {
+					al.add(new Vivante(cel.x(), cel.y()));
+				} else
+					al.add(new Morte(cel.x(), cel.y()));
+			}
 		}
 	}
 
@@ -137,6 +146,7 @@ public class LIFE implements Iterator {
 		return this.raw.contains(c);
 	}
 
+	
 	public LIFE() {
 		raw = new ArrayList<Cellule>();
 		raw.add(new Vivante(0, 1));
