@@ -66,7 +66,7 @@ public class Loader {
 				++y;
 				for (int i = 0; i < line.length(); ++i)
 					if (line.charAt(i) == '*')
-						cells.add(new Cellule(x + i, y));
+						cells.add(new Vivante(x + i, y));
 				break;
 			default:
 				// System.out.println(line);

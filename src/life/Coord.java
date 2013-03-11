@@ -25,6 +25,14 @@ public class Coord implements Comparable<Coord> {
 	public boolean isAt(int x, int y) {
 		return this.x == x && this.y == y;
 	}
+	public boolean isIn(int ax, int ay, int bx, int by) {
+		return !(
+				x < ax 
+			||	y < ay
+			||	bx < x
+			||	by < y
+				);
+	}
 
 	public Coord(Integer x, Integer y) {
 		this.x = x;
@@ -46,5 +54,9 @@ public class Coord implements Comparable<Coord> {
 		public int compare(Coord a, Coord b) {
 			return a.y() - b.y();
 		}
+	}
+	public String toString(){
+		String r = super.toString();
+		return r+"["+x+";"+y+"]";
 	}
 }

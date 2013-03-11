@@ -7,4 +7,14 @@ public class Morte extends Cellule {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public boolean vivante() {
+		return false;
+	}
+
+	@Override
+	public Cellule next() {
+		return (3 <= neighboor && neighboor <= 3)?this:null;
+	}
+
 }
