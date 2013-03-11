@@ -14,7 +14,7 @@ public class Morte extends Cellule {
 
 	@Override
 	public Cellule next() {
-		return (3 <= neighboor && neighboor <= 3)?this:null;
+		return (3 <= neighboor && neighboor <= 3)?new Vivante(x,y):null;
 	}
 
 }

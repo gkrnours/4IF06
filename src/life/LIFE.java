@@ -88,7 +88,7 @@ public class LIFE implements Iterator {
 
 	public void debug() {
 		for (Coord i : raw) {
-			System.out.print("[" + i.x() + ":" + i.y() + "]  ");
+			System.out.println("[" + i.x() + ":" + i.y() + "]  ");
 		}
 		System.out.println();
 	}
@@ -102,16 +102,24 @@ public class LIFE implements Iterator {
 
 	public Object next() {
 		Set<Cellule> work = new HashSet<Cellule>();
+		System.out.println("==== Work ====");
 		for(Cellule c: raw){
-			System.out.print("cell: "+c+"; ");
+			System.out.println("cell: "+c+"; ");
 			work.addAll(recupererVoisinage(c));
 		}
 		System.out.println();
-		System.out.println(work);
+		for(Cellule c: raw){
+			System.out.println("cell: "+c+"; ");
+		}
+		System.out.println();
 		
 		ArrayList<Cellule> r = new ArrayList<Cellule>();
 		for(Cellule cell : work){
 			r.add(cell.next());
+		}
+		System.out.println();
+		for(Cellule c: work){
+			System.out.println("cell: "+c+"; ");
 		}
 		r.removeAll(Collections.singleton(null));
 		raw = r;

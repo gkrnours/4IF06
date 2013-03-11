@@ -3,8 +3,8 @@ package life;
 import java.util.Comparator;
 
 public class Coord implements Comparable<Coord> {
-	private Integer x;
-	private Integer y;
+	protected Integer x;
+	protected Integer y;
 
 	public Integer x() {
 		return x;
