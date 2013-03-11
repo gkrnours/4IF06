@@ -49,7 +49,7 @@ public class LIFE implements Iterator {
 		update();
 	}
 	
-	//retourne la cellule donné en argument si elle existe dans raw, sinon en créé une.
+	//retourne la cellule donnï¿½ en argument si elle existe dans raw, sinon en crï¿½ï¿½ une.
 	public Cellule donneCellule(Cellule c){
 		if(existe(c)){
 			return c;
@@ -179,7 +179,19 @@ public class LIFE implements Iterator {
 	}
 
 	public Object next() {
-		// TODO Auto-generated method stub
-		return null;
+		Cellule c = null;
+		Iterator<Cellule> i;
+		Set<Cellule> work = new HashSet<Cellule>();
+		for(i = raw.iterator(); i.hasNext(); c = i.next()){
+			if(c != null)
+			work.addAll(recupererVoisinage(c));
+		}
+		
+		ArrayList<Cellule> r = new ArrayList<Cellule>();
+		for(Cellule cell : work){
+			r.add(cell.next());
+		}
+		raw = r;
+		return this;
 	}
 }

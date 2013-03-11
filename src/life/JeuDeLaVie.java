@@ -1,8 +1,12 @@
 package life;
 
-import java.util.Scanner;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
 
 public class JeuDeLaVie {
+	private Class<?> display;
 	private static void help(){
 		String[] msg = {
 			"Usage: [-name -h] [-s -c -w] TURN FILE",
@@ -25,11 +29,16 @@ public class JeuDeLaVie {
 	
 	public static void simulate(Integer max, String filename){
 		System.out.println(filename+" for "+max+" turns.");
-		LIFE life = Loader.read(filename);
-		Display display = new DisplaySwingTerm(life);
-		life.debug();
+		final LIFE life = Loader.read(filename);
+		final Display display = new DisplaySwingTerm(life);
 		display.show();
-		life.recupererVoisinage(new Cellule(0,0));
+		Timer runner = new Timer(2000, new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				life.next();
+				display.update();
+			}
+		});
+		runner.start();
 	}
 	
 	/**
