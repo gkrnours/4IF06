@@ -48,6 +48,7 @@ public class LIFE implements Iterator {
 		Collections.sort(raw);
 		update();
 	}
+<<<<<<< Updated upstream
 	
 	//retourne la cellule donn� en argument si elle existe dans raw, sinon en cr�� une.
 	public Cellule donneCellule(Cellule c){
@@ -170,6 +171,7 @@ public class LIFE implements Iterator {
 		}
 		System.out.println();
 	}
+<<<<<<< Updated upstream
 
 	public boolean hasNext() {
 		return true;
@@ -194,4 +196,16 @@ public class LIFE implements Iterator {
 		raw = r;
 		return this;
 	}
+=======
+	
+	/*public set<coordonnée> recupererVoisinage(coordonnée e){
+	set<coordonnée> s = new set<coordonnée>();
+	coordonnée c1 = new ordonnée();
+	coordonnée c2 = new ordonnée();
+	for (int i=0; i<2; i++){
+	
+	}
+*/
+
+>>>>>>> Stashed changes
 }
