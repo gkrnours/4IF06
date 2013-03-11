@@ -2,19 +2,17 @@ package life;
 
 import java.util.Random;
 
-public class Cellule extends Coord {
-
+public abstract class Cellule extends Coord {
+	protected int neighboor;
+	
+	public void setNeighboor(int n){
+		neighboor = Math.max(0, Math.min(8, n));
+	}
 	public Cellule(Integer x, Integer y) {
 		super(x, y);
 	}
 	
-	public boolean vivante(){
-		return (this instanceof Vivante);
-	}
-		
-	public Cellule next(){
-		Random RND = new Random();
-		return RND.nextBoolean()?this:null;
-	}
+	public abstract boolean vivante();
+	public abstract Cellule next();
 
 }

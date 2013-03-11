@@ -48,53 +48,32 @@ public class LIFE implements Iterator {
 		Collections.sort(raw);
 		update();
 	}
-	
-	//retourne la cellule donn� en argument si elle existe dans raw, sinon en cr�� une.
-	public Cellule donneCellule(Cellule c){
-		if(existe(c)){
-			return c;
-		}
-		else return new Cellule(c.x(),c.y());
+	public LIFE() {
+		raw = new ArrayList<Cellule>();
+		raw.add(new Vivante(0, 1));
+		raw.add(new Vivante(1, 1));
+		raw.add(new Vivante(6, 0));
+		raw.add(new Vivante(1, 2));
+		raw.add(new Vivante(5, 2));
+		raw.add(new Vivante(7, 2));
+		raw.add(new Vivante(6, 2));
+		Collections.sort(raw);
+		update();
 	}
 	
 	public Set<Cellule> recupererVoisinage(Cellule c) {
+		System.out.println(c);
+		int ax = c.x()-1, ay = c.y()-1, bx = c.x()+1, by = c.y() +1;
 		Set<Cellule> s = new HashSet<Cellule>();
+		for(Cellule d: raw){
+			if(c.y() < d.y()+1) break; // on a dépassé les voisins
+			if(d.isIn(ax, ay, bx, by)){
+				System.out.println(d);
+				s.add(d);
+			}
+		}
+		c.setNeighboor(s.size());
 		s.add(c);
-		s.add(new Cellule(c.x()-1,c.y()-1));
-		s.add(new Cellule(c.x(),c.y()-1));
-		s.add(new Cellule(c.x()+1,c.y()-1));
-		s.add(new Cellule(c.x()-1,c.y()));
-		s.add(new Cellule(c.x()+1,c.y()));
-		s.add(new Cellule(c.x()-1,c.y()+1));
-		s.add(new Cellule(c.x(),c.y()+1));
-		s.add(new Cellule(c.x()+1,c.y()+1));
-		/*for (Cellule cel : raw) {
-			if (cel.x() == c.x() - 1 && cel.y() == c.y() - 1) {
-				s.add(cel);
-			}
-			if (cel.x() == c.x() && cel.y() == c.y() - 1) {
-				s.add(cel);
-			}
-			if (cel.x() == c.x() + 1 && cel.y() == c.y() - 1) {
-				s.add(cel);
-			}
-			if (cel.x() == c.x() - 1 && cel.y() == c.y()) {
-				s.add(cel);
-			}
-			if (cel.x() == c.x() + 1 && cel.y() == c.y()) {
-				s.add(cel);
-			}
-			if (cel.x() == c.x() - 1 && cel.y() == c.y() + 1) {
-				s.add(cel);
-			}
-			if (cel.x() == c.x() && cel.y() == c.y() + 1) {
-				s.add(cel);
-			}
-			if (cel.x() == c.x() + 1 && cel.y() == c.y() + 1) {
-				s.add(cel);
-			}
-		}*/
-
 		return s;
 	}
 
@@ -147,19 +126,6 @@ public class LIFE implements Iterator {
 	}
 
 	
-	public LIFE() {
-		raw = new ArrayList<Cellule>();
-		raw.add(new Vivante(0, 1));
-		raw.add(new Vivante(1, 1));
-		raw.add(new Vivante(6, 0));
-		raw.add(new Vivante(1, 2));
-		raw.add(new Vivante(5, 2));
-		raw.add(new Vivante(7, 2));
-		raw.add(new Vivante(6, 2));
-		Collections.sort(raw);
-		update();
-	}
-
 	public String toString() {
 		return "LIFE [" + x + "/" + y + "] [" + w + "×" + h + ":" + d + "]";
 	}
@@ -179,11 +145,8 @@ public class LIFE implements Iterator {
 	}
 
 	public Object next() {
-		Cellule c = null;
-		Iterator<Cellule> i;
 		Set<Cellule> work = new HashSet<Cellule>();
-		for(i = raw.iterator(); i.hasNext(); c = i.next()){
-			if(c != null)
+		for(Cellule c: raw){
 			work.addAll(recupererVoisinage(c));
 		}
 		
