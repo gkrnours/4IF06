@@ -55,4 +55,8 @@ public class Coord implements Comparable<Coord> {
 			return a.y() - b.y();
 		}
 	}
+	public String toString(){
+		String r = super.toString();
+		return r+"["+x+";"+y+"]";
+	}
 }

@@ -1,9 +1,8 @@
 package life;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import javax.swing.Timer;
 
 public class JeuDeLaVie {
 	private Class<?> display;
@@ -32,13 +31,20 @@ public class JeuDeLaVie {
 		final LIFE life = Loader.read(filename);
 		final Display display = new DisplaySwingTerm(life);
 		display.show();
-		Timer runner = new Timer(2000, new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+		final Timer runner = new Timer();
+		final TimerTask update = new TimerTask(){
+			@Override
+			public void run() {
+				if(!life.hasNext()){
+					runner.cancel();
+					runner.purge();
+					return;
+				}
 				life.next();
 				display.update();
 			}
-		});
-		runner.start();
+		};
+		runner.schedule(update, 1000, 1000);
 	}
 	
 	/**

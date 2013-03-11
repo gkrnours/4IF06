@@ -9,7 +9,6 @@ public class Morte extends Cellule {
 
 	@Override
 	public boolean vivante() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
