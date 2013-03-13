@@ -8,6 +8,7 @@ import net.slashie.libjcsi.wswing.WSwingConsoleInterface;
 
 public class DisplaySwingTerm extends Display{
 	private ConsoleSystemInterface csi;
+	private static int i=0;
 	public DisplaySwingTerm(LIFE life) {
 		super(life);
 	}
@@ -35,6 +36,8 @@ public class DisplaySwingTerm extends Display{
 				}
 			}
 		}
+		csi.print(77, 0, ""+i, CSIColor.ALICE_BLUE);
 		csi.refresh();
+		i++;
 	}
 }

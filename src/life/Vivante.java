@@ -15,7 +15,5 @@ public class Vivante extends Cellule {
 	@Override
 	public Cellule next() {
 		return (2 <= neighboor && neighboor <= 3)?this:null;
-	}
-
-	
+	}	
 }
