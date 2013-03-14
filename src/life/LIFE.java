@@ -77,6 +77,7 @@ public class LIFE implements Iterator<LIFE> {
 		return s;
 	}
 
+	//TODO supprimer la duplication de code
 	public boolean alive(Cellule c) {
 		int cmpt = 0;
 		Set<Cellule> hs = recupererVoisinage(c);
@@ -102,7 +103,7 @@ public class LIFE implements Iterator<LIFE> {
 
 	}
 
-	
+	//TODO remove
 	public void unTour() {
 		ArrayList<Cellule> al = new ArrayList<Cellule>();
 		Set<Cellule> s=new HashSet<Cellule>();
