@@ -2,7 +2,7 @@ package life;
 
 import java.util.*;
 
-public class LIFE implements Iterator {
+public class LIFE implements Iterator<LIFE> {
 	protected Integer x; // horizontal position
 	protected Integer y; // vertical position
 	protected Integer w; // width
@@ -146,15 +146,16 @@ public class LIFE implements Iterator {
 	public void remove() {
 	}
 
-	public Object next() {
+	public LIFE next() {
 		Set<Cellule> work = new HashSet<Cellule>();
-		System.out.println("==== Work ====");
+		System.out.println("==== RAW  ====");
 		for(Cellule c: raw){
 			System.out.println("cell: "+c+"; ");
 			work.addAll(recupererVoisinage(c));
 		}
 		// ===DEBUG=== =============================//
 		System.out.println();                       //
+		System.out.println("==== RAW  ====");       //
 		for(Cellule c: raw){                        //
 			System.out.println("cell: "+c+"; ");    //
 		}                                           //
@@ -167,6 +168,7 @@ public class LIFE implements Iterator {
 		}
 		// ===DEBUG=== =============================//
 		System.out.println();                       //
+		System.out.println("==== WORK ====");       //
 		for(Cellule c: work){                       //
 			System.out.println("cell: "+c+"; ");    //
 		}                                           //
