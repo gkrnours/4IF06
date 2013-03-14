@@ -40,6 +40,9 @@ public class LIFE implements Iterator<LIFE> {
 		return raw.iterator();
 	}
 
+	/**
+	 * Mises à jour des coordonnées
+	 */
 	private void update() {
 		Collections.sort(raw);
 		x = Collections.min(raw, new Coord.compareX()).x();
