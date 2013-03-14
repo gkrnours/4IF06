@@ -8,11 +8,12 @@ import net.slashie.libjcsi.wswing.WSwingConsoleInterface;
 
 public class DisplaySwingTerm extends Display{
 	private ConsoleSystemInterface csi;
+	private static int i=0;
 	public DisplaySwingTerm(LIFE life) {
 		super(life);
 	}
 	
-	public static String[] utf8 = {".","#", "▢","▣", " ","▓", "◇","◈", "☐","☒"};
+	public static String[] utf8 = {".","#", "â–¢","â–£", " ","â–“", "â—‡","â—ˆ", "â˜�","â˜’"};
 	public void show(){
 		csi = new WSwingConsoleInterface("Life");
 		csi.cls();
@@ -35,6 +36,8 @@ public class DisplaySwingTerm extends Display{
 				}
 			}
 		}
+		csi.print(77, 0, ""+i, CSIColor.APRICOT);
 		csi.refresh();
+		i++;
 	}
 }
