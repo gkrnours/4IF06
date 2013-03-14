@@ -17,7 +17,6 @@ public class Loader {
 			System.err.println("No such file.");
 			return null;
 		}
-		System.out.println(f.list());
 		io.useDelimiter("[\\r\\n;]+");
 		LIFE life = load(io);
 		io.close();
@@ -29,7 +28,6 @@ public class Loader {
 		String line;
 		Integer x = null, y = null;
 		ArrayList<Cellule> cells = new ArrayList<Cellule>();
-		System.out.println(io);
 		if (!io.hasNext()) {
 			System.err.println("Empty file.");
 			return null;

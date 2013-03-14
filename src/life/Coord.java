@@ -9,9 +9,25 @@ public class Coord implements Comparable<Coord> {
 	public Integer x() {
 		return x;
 	}
-
 	public Integer y() {
 		return y;
+	}
+	
+	public Coord(Integer x, Integer y) {
+		this.x = x;
+		this.y = y;
+	}
+	public Coord(Coord c) {
+		this.x = c.x();
+		this.y = c.y();
+	}
+	
+	public boolean isAt(int x, int y) {
+		return this.x == x && this.y == y;
+	}
+	public boolean isIn(int ax, int ay, int bx, int by) {
+		return !(x < ax || y < ay
+			||	bx < x || by < y );
 	}
 
 	@Override
@@ -21,26 +37,19 @@ public class Coord implements Comparable<Coord> {
 		else
 			return this.y - other.y();
 	}
-
-	public boolean isAt(int x, int y) {
-		return this.x == x && this.y == y;
+	@Override
+	public boolean equals(Object c) {
+		if(!(c instanceof Coord)) return super.equals(c);
+		return (x == ((Coord)c).x() && y == ((Coord)c).y());
 	}
-	public boolean isIn(int ax, int ay, int bx, int by) {
-		return !(
-				x < ax 
-			||	y < ay
-			||	bx < x
-			||	by < y
-				);
+	@Override
+	public int hashCode(){
+		return (x+0xFFF)+y;
 	}
-
-	public Coord(Integer x, Integer y) {
-		this.x = x;
-		this.y = y;
-	}
-
-	public boolean equals(Coord c) {
-		return (x == c.x() && y == c.y());
+	@Override
+	public String toString(){
+		String r = super.toString();
+		return r+"["+x+";"+y+"]";
 	}
 
 	// Comparator
@@ -54,9 +63,5 @@ public class Coord implements Comparable<Coord> {
 		public int compare(Coord a, Coord b) {
 			return a.y() - b.y();
 		}
-	}
-	public String toString(){
-		String r = super.toString();
-		return r+"["+x+";"+y+"]";
 	}
 }

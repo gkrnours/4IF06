@@ -4,18 +4,13 @@ public class Vivante extends Cellule {
 
 	public Vivante(Integer x, Integer y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
+	}
+	public Vivante(Coord c) {
+		super(c);
 	}
 
 	@Override
 	public boolean vivante() {
 		return true;
 	}
-
-	@Override
-	public Cellule next() {
-		return (2 <= neighboor && neighboor <= 3)?this:null;
-	}
-
-	
 }

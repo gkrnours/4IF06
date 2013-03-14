@@ -4,17 +4,13 @@ public class Morte extends Cellule {
 
 	public Morte(Integer x, Integer y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
+	}
+	public Morte(Coord c) {
+		super(c);
 	}
 
 	@Override
 	public boolean vivante() {
 		return false;
 	}
-
-	@Override
-	public Cellule next() {
-		return (3 <= neighboor && neighboor <= 3)?new Vivante(x,y):null;
-	}
-
 }

@@ -1,6 +1,11 @@
 package life;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
 public class LIFE implements Iterator<LIFE> {
 	protected Integer x; // horizontal position
@@ -36,6 +41,7 @@ public class LIFE implements Iterator<LIFE> {
 	}
 
 	private void update() {
+		Collections.sort(raw);
 		x = Collections.min(raw, new Coord.compareX()).x();
 		y = Collections.min(raw, new Coord.compareY()).y();
 		w = Collections.max(raw, new Coord.compareX()).x() - x + 1;
@@ -45,7 +51,6 @@ public class LIFE implements Iterator<LIFE> {
 
 	public LIFE(ArrayList<Cellule> cells) {
 		raw = cells;
-		Collections.sort(raw);
 		update();
 	}
 
@@ -58,23 +63,17 @@ public class LIFE implements Iterator<LIFE> {
 		raw.add(new Vivante(5, 2));
 		raw.add(new Vivante(7, 2));
 		raw.add(new Vivante(6, 2));
-		Collections.sort(raw);
 		update();
 	}
 	
 	public Set<Cellule> recupererVoisinage(Cellule c) {
-		System.out.println(c);
-		int ax = c.x()-1, ay = c.y()-1, bx = c.x()+1, by = c.y() +1;
+		int dx = c.x()-1; int dy = c.y()-1;
+		
 		Set<Cellule> s = new HashSet<Cellule>();
-		for(Cellule d: raw){
-			if(c.y() < d.y()+1) break; // on a dépassé les voisins
-			if(d.isIn(ax, ay, bx, by)){
-				System.out.println(d);
-				s.add(d);
-			}
+		for(int i=0; i<9; ++i){
+			Cellule cell = getCell(new Coord(dx+(i%3), dy+(i/3)));
+			s.add(cell);
 		}
-		c.setNeighboor(s.size());
-		s.add(c);
 		return s;
 	}
 
@@ -122,6 +121,11 @@ public class LIFE implements Iterator<LIFE> {
 		}
 	}
 
+	public Cellule getCell(Coord c){
+		int idx = raw.indexOf(c);
+		if(idx == -1) return new Morte(c);
+		else return raw.get(idx);
+	}
 	public boolean existe(Coord c) {
 		return this.raw.contains(c);
 	}
@@ -140,41 +144,45 @@ public class LIFE implements Iterator<LIFE> {
 
 
 	public boolean hasNext() {
-		return true;
+		return 0 < raw.size();
 	}
 
 	public void remove() {
 	}
 
 	public LIFE next() {
+		System.out.println(raw);
 		Set<Cellule> work = new HashSet<Cellule>();
-		System.out.println("==== RAW  ====");
 		for(Cellule c: raw){
-			System.out.println("cell: "+c+"; ");
 			work.addAll(recupererVoisinage(c));
 		}
-		// ===DEBUG=== =============================//
-		System.out.println();                       //
-		System.out.println("==== RAW  ====");       //
-		for(Cellule c: raw){                        //
-			System.out.println("cell: "+c+"; ");    //
-		}                                           //
-		System.out.println();                       //
-		// ===DEBUG=== =============================//
 		
 		ArrayList<Cellule> r = new ArrayList<Cellule>();
 		for(Cellule cell : work){
-			r.add(cell.next());
+			if(alive(cell))
+				r.add(cell.vivante()?cell:new Vivante(cell));
 		}
+		r.removeAll(Collections.singleton(null));
+		raw = r;
+		update();
+		
 		// ===DEBUG=== =============================//
 		System.out.println();                       //
 		System.out.println("==== WORK ====");       //
 		for(Cellule c: work){                       //
 			System.out.println("cell: "+c+"; ");    //
 		}                                           //
+		System.out.println();                       //
+		System.out.println("====  R   ====");       //
+		for(Cellule c: r){                          //
+			System.out.println("cell: "+c+"; ");    //
+		}                                           //
+		System.out.println();                       //
+		System.out.println("==== RAW  ====");       //
+		for(Cellule c: raw){                        //
+			System.out.println("cell: "+c+"; ");    //
+		}                                           //
 		// ===DEBUG=== =============================//
-		r.removeAll(Collections.singleton(null));
-		raw = r;
 		return this;
 	}
 

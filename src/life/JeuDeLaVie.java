@@ -5,7 +5,7 @@ import java.util.TimerTask;
 
 
 public class JeuDeLaVie {
-	private Class<?> display;
+	private Class<Display> display;
 	private static void help(){
 		String[] msg = {
 			"Usage: [-name -h] [-s -c -w] TURN FILE",
@@ -24,18 +24,29 @@ public class JeuDeLaVie {
 		};
 		for(String line: msg) System.out.println(line);
 	}
+	private static void debug(){
+		Coord c = new Coord(0, 0);
+		Coord d = new Coord(0, 0);
+		System.out.println(c.equals(d));
+	}
 
 	
-	public static void simulate(Integer max, String filename){
+	private static void simulate(final Integer max, String filename){
 		System.out.println(filename+" for "+max+" turns.");
+		class TurnCpt{ int cpt; };
+		final TurnCpt turn = new TurnCpt();
+		turn.cpt = 0;
+		
+		// init 
 		final LIFE life = Loader.read(filename);
 		final Display display = new DisplaySwingTerm(life);
 		display.show();
+		// update 
 		final Timer runner = new Timer();
 		final TimerTask update = new TimerTask(){
 			@Override
 			public void run() {
-				if(!life.hasNext()){
+				if(!life.hasNext() || max < ++turn.cpt){
 					runner.cancel();
 					runner.purge();
 					return;
@@ -44,7 +55,7 @@ public class JeuDeLaVie {
 				display.update();
 			}
 		};
-		runner.schedule(update, 1000, 1000);
+		runner.schedule(update, 3000, 3000);
 	}
 	
 	/**
@@ -57,6 +68,7 @@ public class JeuDeLaVie {
 		}
 		switch(args[0]){
 		case "-name": name(); break;
+		case "-d":   debug(); break;
 		case "-s": // Run for X turn
 			Integer max = Integer.parseInt(args[1]);
 			simulate(max, args[2]); 
