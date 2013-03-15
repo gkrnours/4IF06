@@ -36,7 +36,7 @@ public class DisplaySwingTerm extends Display{
 				}
 			}
 		}
-		csi.print(77, 0, ""+i, CSIColor.APRICOT);
+		csi.print(76, 0, ""+i, CSIColor.APRICOT);
 		csi.refresh();
 		i++;
 	}

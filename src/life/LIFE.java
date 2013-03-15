@@ -152,7 +152,8 @@ public class LIFE implements Iterator<LIFE> {
 	}
 
 	public LIFE next() {
-		System.out.println(raw);
+		System.out.println(this+" "+this.hashCode());
+		
 		Set<Cellule> work = new HashSet<Cellule>();
 		for(Cellule c: raw){
 			work.addAll(recupererVoisinage(c));
@@ -163,27 +164,11 @@ public class LIFE implements Iterator<LIFE> {
 			if(alive(cell))
 				r.add(cell.vivante()?cell:new Vivante(cell));
 		}
-		r.removeAll(Collections.singleton(null));
 		raw = r;
 		update();
+
+		//-- //
 		
-		// ===DEBUG=== =============================//
-		System.out.println();                       //
-		System.out.println("==== WORK ====");       //
-		for(Cellule c: work){                       //
-			System.out.println("cell: "+c+"; ");    //
-		}                                           //
-		System.out.println();                       //
-		System.out.println("====  R   ====");       //
-		for(Cellule c: r){                          //
-			System.out.println("cell: "+c+"; ");    //
-		}                                           //
-		System.out.println();                       //
-		System.out.println("==== RAW  ====");       //
-		for(Cellule c: raw){                        //
-			System.out.println("cell: "+c+"; ");    //
-		}                                           //
-		// ===DEBUG=== =============================//
 		return this;
 	}
 

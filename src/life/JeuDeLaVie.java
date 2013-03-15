@@ -55,7 +55,7 @@ public class JeuDeLaVie {
 				display.update();
 			}
 		};
-		runner.schedule(update, 3000, 3000);
+		runner.schedule(update, 1000, 100);
 	}
 	
 	/**
