@@ -6,8 +6,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+/**
+ * Classe de chargement d'un fichier au format .lif
+ * @author 
+ *
+ */
 public class Loader {
 
+	/**
+	 * Lecture du fichier filename
+	 * @param filename
+	 * @return
+	 */
 	public static LIFE read(String filename) {
 		File f = new File(filename);
 		Scanner io;
@@ -23,6 +33,11 @@ public class Loader {
 		return life;
 	}
 
+	/**
+	 * Interprétation du fichier .lif pour le programme
+	 * @param io
+	 * @return
+	 */
 	public static LIFE load(Iterator<String> io) {
 		Scanner tokens;
 		String line;

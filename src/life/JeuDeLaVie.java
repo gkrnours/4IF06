@@ -3,7 +3,11 @@ package life;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
+/**
+ * Classe qui lance le jeu de la vie ainsi que toutes ces options(commmandes shell, aide ...)
+ * @author 
+ *
+ */
 public class JeuDeLaVie {
 	private Class<Display> display;
 	private static void help(){
@@ -15,6 +19,9 @@ public class JeuDeLaVie {
 		for(String line: msg) System.out.println(line);
 	}
 	
+	/**
+	 * Méthode qui renseigne le nom des créateurs du jeu
+	 */
 	private static void name(){
 		String[] msg = {
 			"Baptiste Chartier",
@@ -24,13 +31,23 @@ public class JeuDeLaVie {
 		};
 		for(String line: msg) System.out.println(line);
 	}
+	
+	/**
+	 * Méthode de débogage
+	 */
 	private static void debug(){
 		Coord c = new Coord(0, 0);
 		Coord d = new Coord(0, 0);
 		System.out.println(c.equals(d));
 	}
 
-	
+	/**
+	 * Méthode de simulation du jeu avec lecture de fichier .lif
+	 * appel d'interface graphique avec prise en compte de différents paramètres
+	 * (nombre de générations, temps ...)
+	 * @param max
+	 * @param filename
+	 */
 	private static void simulate(final Integer max, String filename){
 		System.out.println(filename+" for "+max+" turns.");
 		class TurnCpt{ int cpt; };
@@ -59,6 +76,7 @@ public class JeuDeLaVie {
 	}
 	
 	/**
+	 * Main
 	 * @param args
 	 */
 	public static void main(String[] args) {
