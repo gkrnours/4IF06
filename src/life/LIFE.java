@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-public class LIFE implements Iterator<LIFE> {
+public class LIFE extends AllLife implements Iterator<LIFE>{
 	protected Integer x; // horizontal position
 	protected Integer y; // vertical position
 	protected Integer w; // width
@@ -15,6 +15,7 @@ public class LIFE implements Iterator<LIFE> {
 	protected Float d; // density
 	protected ArrayList<Cellule> raw; // list of living cell
 	protected ArrayList<LIFE> shards;// list of LIFE composing this one
+	protected Integer hashcode=hashcode();
 
 	public Integer x() {
 		return x;
@@ -154,6 +155,7 @@ public class LIFE implements Iterator<LIFE> {
 	public void remove() {
 	}
 
+	
 	public LIFE next() {
 		System.out.println(this+" "+this.hashCode());
 		
@@ -175,4 +177,11 @@ public class LIFE implements Iterator<LIFE> {
 		return this;
 	}
 
+	public Integer hashcode(){
+		Integer t=0xFFFF&raw.size();
+		t=t+0xFF&this.w()*0x1000;
+		t=t+0xFF&this.h()*0x10000;
+		super.addAl(t);
+		return t;
+	}
 }
