@@ -13,7 +13,7 @@ public class DisplaySwingTerm extends Display{
 		super(life);
 	}
 	
-	public static String[] utf8 = {".","#", "▢","▣", " ","▓", "◇","◈", "☐","☒"};
+	public static String[] utf8 = {".","#", "â–¢","â–£", " ","â–“", "â—‡","â—ˆ", "â˜�","â˜’"};
 	public void show(){
 		csi = new WSwingConsoleInterface("Life");
 		csi.cls();
@@ -36,7 +36,7 @@ public class DisplaySwingTerm extends Display{
 				}
 			}
 		}
-		csi.print(77, 0, ""+i, CSIColor.ALICE_BLUE);
+		csi.print(76, 0, ""+i, CSIColor.APRICOT);
 		csi.refresh();
 		i++;
 	}

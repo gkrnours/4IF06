@@ -1,8 +1,13 @@
 package life;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
-public class LIFE implements Iterator {
+public class LIFE extends AllLife implements Iterator<LIFE>{
 	protected Integer x; // horizontal position
 	protected Integer y; // vertical position
 	protected Integer w; // width
@@ -10,6 +15,7 @@ public class LIFE implements Iterator {
 	protected Float d; // density
 	protected ArrayList<Cellule> raw; // list of living cell
 	protected ArrayList<LIFE> shards;// list of LIFE composing this one
+	protected Integer hashcode=hashcode();
 
 	public Integer x() {
 		return x;
@@ -35,6 +41,9 @@ public class LIFE implements Iterator {
 		return raw.iterator();
 	}
 
+	/**
+	 * Mises à jour des coordonnées
+	 */
 	private void update() {
 		Collections.sort(raw);
 		x = Collections.min(raw, new Coord.compareX()).x();
@@ -48,6 +57,7 @@ public class LIFE implements Iterator {
 		raw = cells;
 		update();
 	}
+
 	public LIFE() {
 		raw = new ArrayList<Cellule>();
 		raw.add(new Vivante(0, 1));
@@ -61,37 +71,82 @@ public class LIFE implements Iterator {
 	}
 	
 	public Set<Cellule> recupererVoisinage(Cellule c) {
+		int dx = c.x()-1; int dy = c.y()-1;
+		
 		Set<Cellule> s = new HashSet<Cellule>();
-		if(c == null || raw.size() == 0){ return s; }
-		int ax = c.x()-1, ay = c.y()-1, bx = c.x()+1, by = c.y() +1;
-		int neighboor = 0;
-		for(Cellule d: raw){
-			if(c.y() < d.y()+1) break; // on a dépassé les voisins
-			if(d.isIn(ax, ay, bx, by)){
-				s.add(d);
-				++neighboor;
-			}
-			s.add(new Morte(d.x(), d.y()));
+		for(int i=0; i<9; ++i){
+			Cellule cell = getCell(new Coord(dx+(i%3), dy+(i/3)));
+			s.add(cell);
 		}
-		c.setNeighboor(neighboor);
-		s.add(c);
 		return s;
 	}
 
+	//TODO supprimer la duplication de code
+	public boolean alive(Cellule c) {
+		int cmpt = 0;
+		Set<Cellule> hs = recupererVoisinage(c);
+		if (c instanceof Vivante) {
+			for (Cellule cel : hs) {
+				if (!(cel.equals(c))) {
+					if (cel instanceof Vivante) {
+						cmpt++;
+					}
+				}
+			}
+			return (cmpt == 2 || cmpt == 3);
+		} else {
+			for (Cellule cel : hs) {
+				if (!(cel.equals(c))) {
+					if (cel instanceof Vivante) {
+						cmpt++;
+					}
+				}
+			}
+			return (cmpt == 3);
+		}
+
+	}
+
+	//TODO remove
+	public void unTour() {
+		ArrayList<Cellule> al = new ArrayList<Cellule>();
+		Set<Cellule> s=new HashSet<Cellule>();
+		for (Cellule c : this.raw) {
+			if (alive(c)) {
+				al.add(new Vivante(c.x(), c.y()));
+			} else
+				al.add(new Morte(c.x(), c.y()));
+			s=recupererVoisinage(c);
+			for(Cellule cel: s){
+				if (alive(c)) {
+					al.add(new Vivante(cel.x(), cel.y()));
+				} else
+					al.add(new Morte(cel.x(), cel.y()));
+			}
+		}
+	}
+
+	public Cellule getCell(Coord c){
+		int idx = raw.indexOf(c);
+		if(idx == -1) return new Morte(c);
+		else return raw.get(idx);
+	}
 	public boolean existe(Coord c) {
 		return this.raw.contains(c);
 	}
 
+	
 	public String toString() {
 		return "LIFE [" + x + "/" + y + "] [" + w + "×" + h + ":" + d + "]";
 	}
 
 	public void debug() {
 		for (Coord i : raw) {
-			System.out.print("[" + i.x() + ":" + i.y() + "]  ");
+			System.out.println("[" + i.x() + ":" + i.y() + "]  ");
 		}
 		System.out.println();
 	}
+
 
 	public boolean hasNext() {
 		return 0 < raw.size();
@@ -100,21 +155,33 @@ public class LIFE implements Iterator {
 	public void remove() {
 	}
 
-	public Object next() {
+	
+	public LIFE next() {
+		System.out.println(this+" "+this.hashCode());
+		
 		Set<Cellule> work = new HashSet<Cellule>();
 		for(Cellule c: raw){
-			System.out.print("cell: "+c+"; ");
 			work.addAll(recupererVoisinage(c));
 		}
-		System.out.println();
-		System.out.println(work);
 		
 		ArrayList<Cellule> r = new ArrayList<Cellule>();
 		for(Cellule cell : work){
-			r.add(cell.next());
+			if(alive(cell))
+				r.add(cell.vivante()?cell:new Vivante(cell));
 		}
-		r.removeAll(Collections.singleton(null));
 		raw = r;
+		update();
+
+		//-- //
+		
 		return this;
+	}
+
+	public Integer hashcode(){
+		Integer t=0xFFFF&raw.size();
+		t=t+0xFF&this.w()*0x1000;
+		t=t+0xFF&this.h()*0x10000;
+		super.addAl(t);
+		return t;
 	}
 }

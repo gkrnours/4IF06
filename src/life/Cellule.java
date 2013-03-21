@@ -1,18 +1,26 @@
 package life;
 
-import java.util.Random;
-
+/**
+ * classe Cellule qui détermine l'état de la Cellule en question dans la coordonnée @Coord
+ * @see Coord
+ * @author Jimmy
+ *
+ */
 public abstract class Cellule extends Coord {
-	protected int neighboor;
-	
-	public void setNeighboor(int n){
-		neighboor = Math.max(0, Math.min(8, n));
-	}
 	public Cellule(Integer x, Integer y) {
 		super(x, y);
 	}
 	
+	/**
+	 * Constructeur
+	 * @param c
+	 */
+	public Cellule(Coord c) {
+		super(c);
+	}
+	/**
+	 * 
+	 * @return un booléen suivant l'état de la Cellule
+	 */
 	public abstract boolean vivante();
-	public abstract Cellule next();
-
 }

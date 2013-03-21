@@ -3,9 +3,13 @@ package life;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
+/**
+ * Classe qui lance le jeu de la vie ainsi que toutes ces options(commmandes shell, aide ...)
+ * @author 
+ *
+ */
 public class JeuDeLaVie {
-	private Class<?> display;
+	private Class<Display> display;
 	private static void help(){
 		String[] msg = {
 			"Usage: [-name -h] [-s -c -w] TURN FILE",
@@ -15,6 +19,9 @@ public class JeuDeLaVie {
 		for(String line: msg) System.out.println(line);
 	}
 	
+	/**
+	 * Méthode qui renseigne le nom des créateurs du jeu
+	 */
 	private static void name(){
 		String[] msg = {
 			"Baptiste Chartier",
@@ -24,18 +31,39 @@ public class JeuDeLaVie {
 		};
 		for(String line: msg) System.out.println(line);
 	}
-
 	
-	public static void simulate(Integer max, String filename){
+	/**
+	 * Méthode de débogage
+	 */
+	private static void debug(){
+		Coord c = new Coord(0, 0);
+		Coord d = new Coord(0, 0);
+		System.out.println(c.equals(d));
+	}
+
+	/**
+	 * Méthode de simulation du jeu avec lecture de fichier .lif
+	 * appel d'interface graphique avec prise en compte de différents paramètres
+	 * (nombre de générations, temps ...)
+	 * @param max
+	 * @param filename
+	 */
+	private static void simulate(final Integer max, String filename){
 		System.out.println(filename+" for "+max+" turns.");
+		class TurnCpt{ int cpt; };
+		final TurnCpt turn = new TurnCpt();
+		turn.cpt = 0;
+		
+		// init 
 		final LIFE life = Loader.read(filename);
 		final Display display = new DisplaySwingTerm(life);
 		display.show();
+		// update 
 		final Timer runner = new Timer();
 		final TimerTask update = new TimerTask(){
 			@Override
 			public void run() {
-				if(!life.hasNext()){
+				if(!life.hasNext() || max < ++turn.cpt){
 					runner.cancel();
 					runner.purge();
 					return;
@@ -44,10 +72,11 @@ public class JeuDeLaVie {
 				display.update();
 			}
 		};
-		runner.schedule(update, 1000, 1000);
+		runner.schedule(update, 1000, 100);
 	}
 	
 	/**
+	 * Main
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -57,6 +86,7 @@ public class JeuDeLaVie {
 		}
 		switch(args[0]){
 		case "-name": name(); break;
+		case "-d":   debug(); break;
 		case "-s": // Run for X turn
 			Integer max = Integer.parseInt(args[1]);
 			simulate(max, args[2]); 

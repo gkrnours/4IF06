@@ -1,20 +1,34 @@
 package life;
 
+/**
+ * Classe qui définit l'état d'une @Cellule en morte
+ * @author Jimmy
+ *
+ */
 public class Morte extends Cellule {
-
+	
+	/**
+	 * Constructeur
+	 * @param x
+	 * @param y
+	 */
 	public Morte(Integer x, Integer y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
 	}
-
+	
+	/**
+	 * 
+	 * @param c
+	 */
+	public Morte(Coord c) {
+		super(c);
+	}
+	
+	/**
+	 * @return false car nous sommes dans la classe Morte
+	 */
 	@Override
 	public boolean vivante() {
 		return false;
 	}
-
-	@Override
-	public Cellule next() {
-		return (3 <= neighboor && neighboor <= 3)?this:null;
-	}
-
 }
