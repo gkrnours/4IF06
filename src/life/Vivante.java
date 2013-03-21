@@ -31,4 +31,9 @@ public class Vivante extends Cellule {
 	public boolean vivante() {
 		return true;
 	}
+
+	@Override
+	public Cellule next() {
+		return (2 <= neighboor && neighboor <= 3)?this:null;
+	}	
 }
