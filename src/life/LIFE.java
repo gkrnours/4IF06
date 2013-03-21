@@ -176,10 +176,14 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 		
 		return this;
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public Integer hashcode(){
 		Integer t=0xFFFF&raw.size();
-		t=t+0xFF&this.w()*0x1000;
+		t=t+0xFF&this.w()*0x10000;
 		t=t+0xFF&this.h()*0x10000;
 		super.addAl(t);
 		return t;

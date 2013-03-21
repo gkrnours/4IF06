@@ -2,6 +2,10 @@ package life;
 
 import java.util.*;
 
+/**
+ * Classe abstraite qui stock les Hashcodes et les range par ordre croissant de tours
+ *
+ */
 public class AllLife {
 	private ArrayList<Integer> Al;
 
