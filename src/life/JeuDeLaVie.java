@@ -72,7 +72,7 @@ public class JeuDeLaVie {
 				display.update();
 			}
 		};
-		runner.schedule(update, 1000, 100);
+		runner.schedule(update, 1000, 400);
 	}
 	
 	/**
