@@ -3,6 +3,9 @@ package life;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import net.slashie.libjcsi.CharKey;
+import net.slashie.libjcsi.ConsoleSystemInterface;
+
 /**
  * Classe qui lance le jeu de la vie ainsi que toutes ces options(commmandes shell, aide ...)
  * @author 
@@ -56,9 +59,11 @@ public class JeuDeLaVie {
 		
 		// init 
 		final LIFE life = Loader.read(filename);
+		
 		final Display display = new DisplaySwingTerm(life);
 		display.show();
 		// update 
+		/*
 		final Timer runner = new Timer();
 		final TimerTask update = new TimerTask(){
 			@Override
@@ -72,7 +77,40 @@ public class JeuDeLaVie {
 				display.update();
 			}
 		};
-		runner.schedule(update, 1000, 100);
+		runner.schedule(update, 1000, 1000);
+		*/
+		System.out.println(display instanceof DisplaySwingTerm);
+		if(display instanceof DisplaySwingTerm){
+			boolean forest = true;
+			while(forest){
+				switch(((DisplaySwingTerm) display).csi.inkey().code){
+				case CharKey.SPACE:
+					if(!life.hasNext()) break;
+					life.next();   
+					display.update();
+					break;
+				case CharKey.l:
+				case CharKey.RARROW:
+					System.out.println("droite");
+					break;
+				case CharKey.k:
+				case CharKey.UARROW:
+					System.out.println("haut");
+					break;
+				case CharKey.j:
+				case CharKey.DARROW:
+					System.out.println("bas");
+					break;
+				case CharKey.h:
+				case CharKey.LARROW:
+					System.out.println("gauche");
+					break;
+				case CharKey.ESC:
+					forest = false;
+					break;
+				}
+			}
+		}
 	}
 	
 	/**
@@ -99,5 +137,6 @@ public class JeuDeLaVie {
 			break;
 		default: help();
 		}
+		System.exit(0);
 	}
 }

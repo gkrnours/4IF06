@@ -15,7 +15,7 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 	protected Float d; // density
 	protected ArrayList<Cellule> raw; // list of living cell
 	protected ArrayList<LIFE> shards;// list of LIFE composing this one
-	protected Integer hashcode=hashcode();
+	//protected Integer hashcode=hashcode();
 
 	public Integer x() {
 		return x;
@@ -45,6 +45,7 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 	 * Mises à jour des coordonnées
 	 */
 	private void update() {
+		if(raw.isEmpty()) return;
 		Collections.sort(raw);
 		x = Collections.min(raw, new Coord.compareX()).x();
 		y = Collections.min(raw, new Coord.compareY()).y();
