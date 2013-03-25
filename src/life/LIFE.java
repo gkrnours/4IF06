@@ -57,6 +57,7 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 
 	public LIFE(ArrayList<Cellule> cells) {
 		raw = cells;
+		history=new ArrayList<ArrayList<Cellule>>();
 		update();
 	}
 
@@ -174,15 +175,15 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 		raw = r;
 		update();
 		if(existeHashcode(this.hashcode)!=-1){
-			/*
+			
 			if(!(history.contains(this.raw))){
 				history.add(this.raw);
 			}
 			else 
 				return new LifeCyclic(history.indexOf(this.raw),arrayListToSet(this.raw));
-			*/
+			
 		}
-		super.addAl(hashcode);
+		super.addAl(hashcode());
 				
 		return this;
 	}
@@ -198,9 +199,16 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 
 	public Integer hashcode(){
 		if(raw == null) return 0;
-		Integer t=0xFFF&raw.size();
+		//Integer t=0xFFF&raw.size();
 		Integer hl=0xFFFFF&((this.w()+this.h()/2)*0x1000);
-		t=t+hl;
+		//t=t+hl;
+		Integer t=0;
+		for(Cellule c: raw){
+			t+=c.ha;
+		}
+		t=0xFFF&t;
+		t/=raw.size();
+		t+=hl;
 		super.addAl(t);
 		return t;
 	}

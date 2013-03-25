@@ -10,7 +10,7 @@ public abstract class Cellule extends Coord {
 	public Cellule(Integer x, Integer y) {
 		super(x, y);
 	}
-	
+		
 	/**
 	 * Constructeur
 	 * @param c
