@@ -3,7 +3,7 @@ package life;
 import java.util.*;
 
 public class AllLife {
-	private ArrayList<Integer> Al;
+	protected ArrayList<Integer> Al;
 
 	public AllLife() {
 		Al = new ArrayList<Integer>();

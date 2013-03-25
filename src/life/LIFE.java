@@ -16,7 +16,7 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 	protected ArrayList<Cellule> raw; // list of living cell
 	protected ArrayList<LIFE> shards;// list of LIFE composing this one
 	protected Integer hashcode=hashcode();
-	protected Set<ArrayList<Cellule>> history;
+	protected ArrayList<ArrayList<Cellule>> history;
 
 	public Integer x() {
 		return x;
@@ -172,17 +172,33 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 		}
 		raw = r;
 		update();
-
-		//-- //
-		
+		if(existeHashcode(this.hashcode)!=-1){
+			if(!(history.contains(this.raw))){
+				history.add(this.raw);
+			}
+			else return new LifeCyclic(history.indexOf(this.raw),arrayListToSet(this.raw));
+		}
+		else{
+			super.addAl(hashcode);
+		}
+				
 		return this;
+	}
+	
+	public Set<Cellule> arrayListToSet(ArrayList<Cellule> Al){
+		
+		Set<Cellule> s=new HashSet<Cellule>();
+		for(Cellule c: Al){
+			s.add(c);
+		}
+		return s;
 	}
 
 	public Integer hashcode(){
 		if(raw == null) return 0;
-		Integer t=0xFFFF&raw.size();
-		t=t+0xFF&this.w()*0x1000;
-		t=t+0xFF&this.h()*0x100000;
+		Integer t=0xFFF&raw.size();
+		Integer hl=0xFFFFF&((this.w()+this.h()/2)*0x1000);
+		t=t+hl;
 		super.addAl(t);
 		return t;
 	}
