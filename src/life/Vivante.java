@@ -31,4 +31,5 @@ public class Vivante extends Cellule {
 	public boolean vivante() {
 		return true;
 	}
+
 }

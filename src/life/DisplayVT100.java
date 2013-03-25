@@ -37,4 +37,22 @@ public class DisplayVT100 extends Display{
 		}
 		csi.refresh();
 	}
+
+	@Override
+	public void show(Coord topLeft, Coord bottomRight) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void view() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void view(Coord topLeft, Coord bottomRight) {
+		// TODO Auto-generated method stub
+		
+	}
 }
