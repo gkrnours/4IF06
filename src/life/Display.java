@@ -10,4 +10,5 @@ public abstract class Display {
 	public abstract void update();
 	public abstract void view();
 	public abstract void view(Coord topLeft, Coord bottomRight);
+
 }

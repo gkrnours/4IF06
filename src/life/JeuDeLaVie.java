@@ -13,6 +13,7 @@ import net.slashie.libjcsi.ConsoleSystemInterface;
  */
 public class JeuDeLaVie {
 	private Class<Display> display;
+	private static double x,y,i,j=0;
 	private static void help(){
 		String[] msg = {
 			"Usage: [-name -h] [-s -c -w] TURN FILE",
@@ -89,21 +90,25 @@ public class JeuDeLaVie {
 					life.next();   
 					display.update();
 					break;
-				case CharKey.l:
-				case CharKey.RARROW:
-					System.out.println("droite");
-					break;
 				case CharKey.k:
 				case CharKey.UARROW:
 					System.out.println("haut");
+					((DisplaySwingTerm) display).move(new Coord( 1, 0));
 					break;
 				case CharKey.j:
 				case CharKey.DARROW:
 					System.out.println("bas");
+					((DisplaySwingTerm) display).move(new Coord(-1, 0));
 					break;
 				case CharKey.h:
 				case CharKey.LARROW:
 					System.out.println("gauche");
+					((DisplaySwingTerm) display).move(new Coord( 0, 1));
+					break;
+				case CharKey.l:
+				case CharKey.RARROW:
+					System.out.println("droite");
+					((DisplaySwingTerm) display).move(new Coord( 0,-1));
 					break;
 				case CharKey.ESC:
 					forest = false;
