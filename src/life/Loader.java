@@ -64,8 +64,8 @@ public class Loader {
 			case "#P":
 				tokens = new Scanner(line);
 				tokens.next();
-				y = tokens.nextInt();
-				x = tokens.nextInt() - 1;
+				x = tokens.nextInt();
+				y = tokens.nextInt() - 1;
 				tokens.close();
 				break;
 			case "**":
