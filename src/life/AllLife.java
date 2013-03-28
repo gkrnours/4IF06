@@ -13,6 +13,12 @@ public class AllLife {
 		Al.add(Al.size(), n);
 	}
 	
+	public void printAl(){
+		for(Integer i: Al){
+			System.out.print(Al.indexOf(i)+" : "+i+" // ");
+		}
+		System.out.println();
+	}
 	public int existeHashcode(Integer n){
 		return Al.indexOf(n);
 	}

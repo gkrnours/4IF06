@@ -16,7 +16,7 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 	protected ArrayList<Cellule> raw; // list of living cell
 	protected ArrayList<LIFE> shards;// list of LIFE composing this one
 	protected Integer hashcode=hashcode();
-	protected ArrayList<ArrayList<Cellule>> history;
+	protected Set<ArrayList<Cellule>> history;
 
 	public Integer x() {
 		return x;
@@ -57,7 +57,7 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 
 	public LIFE(ArrayList<Cellule> cells) {
 		raw = cells;
-		history=new ArrayList<ArrayList<Cellule>>();
+		history=new HashSet<ArrayList<Cellule>>();
 		update();
 	}
 
@@ -134,6 +134,7 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 		if(idx == -1) return new Morte(c);
 		else return raw.get(idx);
 	}
+	
 	public boolean existe(Coord c) {
 		return this.raw.contains(c);
 	}
@@ -180,11 +181,12 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 				history.add(this.raw);
 			}
 			else 
-				return new LifeCyclic(history.indexOf(this.raw),arrayListToSet(this.raw));
-			
+				return new LifeCyclic(this.raw);			
 		}
-		super.addAl(hashcode());
-				
+		else{
+		super.addAl(this.hashcode());
+		}
+		super.printAl();
 		return this;
 	}
 	
@@ -199,17 +201,12 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 
 	public Integer hashcode(){
 		if(raw == null) return 0;
-		//Integer t=0xFFF&raw.size();
-		Integer hl=0xFFFFF&((this.w()+this.h()/2)*0x1000);
-		//t=t+hl;
+		Integer hl=(w()+h());
 		Integer t=0;
 		for(Cellule c: raw){
-			t+=c.ha;
+			t+=c.hashCode()%0xFFFFFF;
 		}
-		t=0xFFF&t;
-		t/=raw.size();
-		t+=hl;
-		super.addAl(t);
+		t+=hl*0x1000000;
 		return t;
 	}
 }

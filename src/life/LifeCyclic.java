@@ -3,11 +3,10 @@ import java.util.*;
 
 public class LifeCyclic extends LIFE {
 
-	protected Integer periode;
-	protected Set<Cellule> history;
-	
-	public LifeCyclic(Integer p, Set<Cellule> s){
-		periode=p;
-		history=s;
+	public LifeCyclic(ArrayList<Cellule> raw) {
+		super(raw);
 	}
+	protected Integer periode;
+	protected ArrayList<ArrayList<Cellule>> history;
+	
 }
