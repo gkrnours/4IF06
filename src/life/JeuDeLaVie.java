@@ -88,6 +88,7 @@ public class JeuDeLaVie {
 				case CharKey.SPACE:
 					if(!life.hasNext()) break;
 					life.next();   
+					if(life instanceof )
 					display.update();
 					break;
 				case CharKey.k:

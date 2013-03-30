@@ -8,6 +8,7 @@ import net.slashie.libjcsi.wswing.WSwingConsoleInterface;
 
 public class DisplaySwingTerm extends Display{
 	public ConsoleSystemInterface csi;
+	public String type;
 	private static int i=0;
 	private static Coord origin = null;
 	private static Coord span = null;
@@ -70,6 +71,7 @@ public class DisplaySwingTerm extends Display{
 		csi.print(72, 2, "y   "+origin.y(), CSIColor.AMARANTH);
 		csi.print(66, 3, "span: x   "+span.x(), CSIColor.MAUVE_TAUPE);
 		csi.print(72, 4, "y   "+span.y(), CSIColor.MAUVE_TAUPE);
+		
 		csi.refresh();
 	}
 	public int[] ousuisje(){
