@@ -42,10 +42,6 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		return raw.iterator();
 	}
 
-	public ArrayList<Cellule> getRaw() {
-		return raw;
-	}
-
 	/**
 	 * Mises à jour des coordonnées
 	 */
@@ -166,7 +162,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 	}
 
 	public LIFE next() {
-		System.out.println(this + " " +this.hashCode());
+		System.out.println(this + " ");
 		Set<Cellule> work = new HashSet<Cellule>();
 		for (Cellule c : raw) {
 			work.addAll(recupererVoisinage(c));

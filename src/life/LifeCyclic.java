@@ -8,32 +8,35 @@ public class LifeCyclic extends LIFE {
 		super(raw);
 		this.x=x;
 		this.y=y;
+		this.origin_x=x;
+		this.origin_y=y;
 	}
 
 	protected Integer periode = null;
 	protected Integer current = null;
 	protected Integer x;
 	protected Integer y;
-	//protected ArrayList<ArrayList<Cellule>> history;
-	protected ArrayList<LifeCyclic> history;
+	private Integer origin_x;
+	private Integer origin_y;
+	protected ArrayList<ArrayList<Cellule>> history;
 
 	@Override
 	public LIFE next() {
 		if (periode == null) {// c'est la premiere fois qu'on le rencontre
 			super.next(); // pourquoi on fait letape suivante ????
 			if (!history.get(0).equals(raw)) {
-				history.add(this);
+				history.add(raw);
 			} else {
 				periode = history.size();
 				current = 0;
-				if (!(x.equals(history.get(0).x)&&y.equals(history.get(0)))){ //s'ils n'ont pas le meme history, alors c'est un 
-					return Enterprise e=new Enterprise(super.getRaw(),this.x,this.y);
+				if (!(origin_x.equals(x) && origin_y.equals(y))){ 
+					return new Enterprise(raw,this.x,this.y);
 				}
 			}
 			return this;
 		}
 		++current;
-		raw = history.get(current).super.getRaw();
+		raw = history.get(current);
 
 		return this;
 	}
