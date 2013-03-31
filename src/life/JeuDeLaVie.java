@@ -80,7 +80,6 @@ public class JeuDeLaVie {
 		};
 		runner.schedule(update, 1000, 1000);
 		*/
-		System.out.println(display instanceof DisplaySwingTerm);
 		if(display instanceof DisplaySwingTerm){
 			boolean forest = true;
 			while(forest){
@@ -88,27 +87,23 @@ public class JeuDeLaVie {
 				case CharKey.SPACE:
 					if(!life.hasNext()) break;
 					life.next();   
-					if(life instanceof )
+					if(life instanceof LIFE)
 					display.update();
 					break;
 				case CharKey.k:
 				case CharKey.UARROW:
-					System.out.println("haut");
 					((DisplaySwingTerm) display).move(new Coord( 1, 0));
 					break;
 				case CharKey.j:
 				case CharKey.DARROW:
-					System.out.println("bas");
 					((DisplaySwingTerm) display).move(new Coord(-1, 0));
 					break;
 				case CharKey.h:
 				case CharKey.LARROW:
-					System.out.println("gauche");
 					((DisplaySwingTerm) display).move(new Coord( 0, 1));
 					break;
 				case CharKey.l:
 				case CharKey.RARROW:
-					System.out.println("droite");
 					((DisplaySwingTerm) display).move(new Coord( 0,-1));
 					break;
 				case CharKey.ESC:

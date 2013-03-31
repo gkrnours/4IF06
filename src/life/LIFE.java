@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-public class LIFE extends AllLife implements Iterator<LIFE>{
+public class LIFE extends AllLife implements Iterator<LIFE> {
 	protected Integer x; // horizontal position
 	protected Integer y; // vertical position
 	protected Integer w; // width
@@ -15,7 +15,7 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 	protected Float d; // density
 	protected ArrayList<Cellule> raw; // list of living cell
 	protected ArrayList<LIFE> shards;// list of LIFE composing this one
-	protected Integer hashcode=hashcode();
+	protected Integer hashcode = hashcode();
 	protected Set<ArrayList<Cellule>> history;
 
 	public Integer x() {
@@ -41,8 +41,8 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 	public Iterator<Cellule> raw() {
 		return raw.iterator();
 	}
-	
-	public ArrayList<Cellule> getRaw(){
+
+	public ArrayList<Cellule> getRaw() {
 		return raw;
 	}
 
@@ -50,7 +50,8 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 	 * Mises à jour des coordonnées
 	 */
 	private void update() {
-		if(raw.isEmpty()) return;
+		if (raw.isEmpty())
+			return;
 		Collections.sort(raw);
 		x = Collections.min(raw, new Coord.compareX()).x();
 		y = Collections.min(raw, new Coord.compareY()).y();
@@ -61,7 +62,7 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 
 	public LIFE(ArrayList<Cellule> cells) {
 		raw = cells;
-		history=new HashSet<ArrayList<Cellule>>();
+		history = new HashSet<ArrayList<Cellule>>();
 		update();
 	}
 
@@ -76,19 +77,20 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 		raw.add(new Vivante(6, 2));
 		update();
 	}
-	
+
 	public Set<Cellule> recupererVoisinage(Cellule c) {
-		int dx = c.x()-1; int dy = c.y()-1;
-		
+		int dx = c.x() - 1;
+		int dy = c.y() - 1;
+
 		Set<Cellule> s = new HashSet<Cellule>();
-		for(int i=0; i<9; ++i){
-			Cellule cell = getCell(new Coord(dx+(i%3), dy+(i/3)));
+		for (int i = 0; i < 9; ++i) {
+			Cellule cell = getCell(new Coord(dx + (i % 3), dy + (i / 3)));
 			s.add(cell);
 		}
 		return s;
 	}
 
-	//TODO supprimer la duplication de code
+	// TODO supprimer la duplication de code
 	public boolean alive(Cellule c) {
 		int cmpt = 0;
 		Set<Cellule> hs = recupererVoisinage(c);
@@ -114,17 +116,17 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 
 	}
 
-	//TODO remove
+	// TODO remove
 	public void unTour() {
 		ArrayList<Cellule> al = new ArrayList<Cellule>();
-		Set<Cellule> s=new HashSet<Cellule>();
+		Set<Cellule> s = new HashSet<Cellule>();
 		for (Cellule c : this.raw) {
 			if (alive(c)) {
 				al.add(new Vivante(c.x(), c.y()));
 			} else
 				al.add(new Morte(c.x(), c.y()));
-			s=recupererVoisinage(c);
-			for(Cellule cel: s){
+			s = recupererVoisinage(c);
+			for (Cellule cel : s) {
 				if (alive(c)) {
 					al.add(new Vivante(cel.x(), cel.y()));
 				} else
@@ -133,17 +135,18 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 		}
 	}
 
-	public Cellule getCell(Coord c){
+	public Cellule getCell(Coord c) {
 		int idx = raw.indexOf(c);
-		if(idx == -1) return new Morte(c);
-		else return raw.get(idx);
+		if (idx == -1)
+			return new Morte(c);
+		else
+			return raw.get(idx);
 	}
-	
+
 	public boolean existe(Coord c) {
 		return this.raw.contains(c);
 	}
 
-	
 	public String toString() {
 		return "LIFE [" + x + "/" + y + "] [" + w + "×" + h + ":" + d + "]";
 	}
@@ -155,7 +158,6 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 		System.out.println();
 	}
 
-
 	public boolean hasNext() {
 		return 0 < raw.size();
 	}
@@ -163,54 +165,49 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 	public void remove() {
 	}
 
-	
 	public LIFE next() {
-		System.out.println(this+" "+this.hashCode());
-		
+		System.out.println(this + " " +this.hashCode());
 		Set<Cellule> work = new HashSet<Cellule>();
-		for(Cellule c: raw){
+		for (Cellule c : raw) {
 			work.addAll(recupererVoisinage(c));
 		}
-		
 		ArrayList<Cellule> r = new ArrayList<Cellule>();
-		for(Cellule cell : work){
-			if(alive(cell))
-				r.add(cell.vivante()?cell:new Vivante(cell));
+		for (Cellule cell : work) {
+			if (alive(cell))
+				r.add(cell.vivante() ? cell : new Vivante(cell));
 		}
 		raw = r;
 		update();
-		if(existeHashcode(this.hashcode)!=-1){
-			
-			if(!(history.contains(this.raw))){
+		if (existeHashcode(this.hashcode()) != -1) {
+			if (!(history.contains(this.raw))) {
 				history.add(this.raw);
-			}
-			else 
-				return new LifeCyclic(this.raw,x(),y());			
-		}
-		else{
-		super.addAl(this.hashcode());
+			} else
+				return new LifeCyclic(this.raw, x(), y());
+		} else {
+			super.addAl(this.hashcode());
 		}
 		super.printAl();
 		return this;
 	}
-	
-	public Set<Cellule> arrayListToSet(ArrayList<Cellule> Al){
-		
-		Set<Cellule> s=new HashSet<Cellule>();
-		for(Cellule c: Al){
+
+	public Set<Cellule> arrayListToSet(ArrayList<Cellule> Al) {
+
+		Set<Cellule> s = new HashSet<Cellule>();
+		for (Cellule c : Al) {
 			s.add(c);
 		}
 		return s;
 	}
 
-	public Integer hashcode(){
-		if(raw == null) return 0;
-		Integer hl=(w()+h());
-		Integer t=0;
-		for(Cellule c: raw){
-			t+=c.hashCode()%0xFFFFFF;
+	public Integer hashcode() {
+		if (raw == null)
+			return 0;
+		Integer hl = (w() + h());
+		Integer t = 0;
+		for (Cellule c : raw) {
+			t += c.hashCode() % 0xFFFFFF;
 		}
-		t+=hl*0x1000000;
+		t += hl * 0x1000000;
 		return t;
 	}
 }
