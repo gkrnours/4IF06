@@ -41,6 +41,10 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 	public Iterator<Cellule> raw() {
 		return raw.iterator();
 	}
+	
+	public ArrayList<Cellule> getRaw(){
+		return raw;
+	}
 
 	/**
 	 * Mises à jour des coordonnées
@@ -181,7 +185,7 @@ public class LIFE extends AllLife implements Iterator<LIFE>{
 				history.add(this.raw);
 			}
 			else 
-				return new LifeCyclic(this.raw);			
+				return new LifeCyclic(this.raw,x(),y());			
 		}
 		else{
 		super.addAl(this.hashcode());
