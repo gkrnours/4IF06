@@ -1,4 +1,4 @@
-import life.Cellule;
+package life;
 
 /**
  * Classe qui définit l'état d'une @Cellule en vivante

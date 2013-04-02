@@ -1,10 +1,6 @@
 package life;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import net.slashie.libjcsi.CharKey;
-import net.slashie.libjcsi.ConsoleSystemInterface;
 
 /**
  * Classe qui lance le jeu de la vie ainsi que toutes ces options(commmandes shell, aide ...)
@@ -12,8 +8,6 @@ import net.slashie.libjcsi.ConsoleSystemInterface;
  *
  */
 public class JeuDeLaVie {
-	private Class<Display> display;
-	private static double x,y,i,j=0;
 	private static void help(){
 		String[] msg = {
 			"Usage: [-name -h] [-s -c -w] TURN FILE",
@@ -54,9 +48,6 @@ public class JeuDeLaVie {
 	 */
 	private static void simulate(final Integer max, String filename){
 		System.out.println(filename+" for "+max+" turns.");
-		class TurnCpt{ int cpt; };
-		final TurnCpt turn = new TurnCpt();
-		turn.cpt = 0;
 		
 		// init 
 		final LIFE life = Loader.read(filename);

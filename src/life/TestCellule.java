@@ -1,7 +1,6 @@
+package life;
 
 
-import life.Morte;
-import life.Vivante;
 
 import org.junit.Test;
 
