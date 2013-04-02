@@ -182,7 +182,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 			if (!(history.contains(this.raw))) {
 				history.add(this.raw);
 			} else
-				return new LifeCyclic(this.raw, x(), y());
+				return new LifePreCyclic(this.raw);
 		} else {
 			super.addAl(this.hashcode());
 		}

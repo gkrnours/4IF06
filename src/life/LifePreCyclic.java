@@ -4,12 +4,10 @@ import java.util.ArrayList;
 
 public class LifePreCyclic extends LIFE {
 
-	public LifePreCyclic(ArrayList<Cellule> raw, Integer x, Integer y) {
+	public LifePreCyclic(ArrayList<Cellule> raw) {
 		super(raw);
-		this.x = x;
-		this.y = y;
-		this.origin_x = x;
-		this.origin_y = y;
+		this.origin_x = this.x;
+		this.origin_y = this.y;
 		history.add(raw);
 	}
 
@@ -29,15 +27,13 @@ public class LifePreCyclic extends LIFE {
 				history.add(raw);
 			} 
 			else {
-				periode = history.size();
-				current = 0;
-				if(history.get(1).equals(raw)){ // alors on a un stable
-					return new LifeCyclicStable(raw,this.x,this.y);
+				if(history.size() == 1){ // alors on a un stable
+					return new LifeCyclicStable(raw);
 				}
-				else if (!(origin_x.equals(x) && origin_y.equals(y))) {
-					return new Enterprise(raw, this.x, this.y);
+				if (origin_x.equals(x) && origin_y.equals(y)) {
+					return new LifeCyclic(raw, history);
 				}
-				else return new LifeCyclic(raw, this.x,this.y);
+				return new Enterprise(raw, history, this.x,this.y);
 			}
 			return this;
 		}
