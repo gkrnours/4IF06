@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 import java.util.Set;
 
 public class LIFE extends AllLife implements Iterator<LIFE> {
@@ -55,13 +54,18 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		h = Collections.max(raw, new Coord.compareY()).y() - y + 1;
 		d = (float) (raw.size() / (1. * w * h));
 	}
-
+	/**
+	 * constructeur
+	 * @param cells
+	 */
 	public LIFE(ArrayList<Cellule> cells) {
 		raw = cells;
 		history = new HashSet<ArrayList<Cellule>>();
 		update();
 	}
-
+	/**
+	 * constructeur
+	 */
 	public LIFE() {
 		raw = new ArrayList<Cellule>();
 		raw.add(new Vivante(0, 1));

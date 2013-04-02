@@ -1,11 +1,14 @@
-package life;
+
+
+import life.Morte;
+import life.Vivante;
 
 import org.junit.Test;
 
 public class TestCellule {
 
 	/**
-	 * Test de l'initialisation des Vivante
+	 * Test de l'initialisation des Vivantes
 	 * @throws Exception
 	 */
 	@Test
@@ -18,7 +21,7 @@ public class TestCellule {
 	
 
 	/**
-	 * Test de l'initialisation des Morte
+	 * Test de l'initialisation des Mortes
 	 * @throws Exception
 	 */
 	@Test
