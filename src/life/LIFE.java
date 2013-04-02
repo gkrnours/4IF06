@@ -189,7 +189,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		super.printAl();
 		return this;
 	}
-
+	
 	public Set<Cellule> arrayListToSet(ArrayList<Cellule> Al) {
 
 		Set<Cellule> s = new HashSet<Cellule>();
