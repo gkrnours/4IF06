@@ -54,8 +54,10 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		h = Collections.max(raw, new Coord.compareY()).y() - y + 1;
 		d = (float) (raw.size() / (1. * w * h));
 	}
+
 	/**
 	 * constructeur
+	 * 
 	 * @param cells
 	 */
 	public LIFE(ArrayList<Cellule> cells) {
@@ -63,6 +65,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		history = new HashSet<ArrayList<Cellule>>();
 		update();
 	}
+
 	/**
 	 * constructeur
 	 */
@@ -91,6 +94,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 	}
 
 	// TODO supprimer la duplication de code
+	// retourne vrai si la cellule c peut vivre, faux sinon
 	public boolean alive(Cellule c) {
 		int cmpt = 0;
 		Set<Cellule> hs = recupererVoisinage(c);
@@ -117,6 +121,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 	}
 
 	// TODO remove
+	// effectue le tour suivant
 	public void unTour() {
 		ArrayList<Cellule> al = new ArrayList<Cellule>();
 		Set<Cellule> s = new HashSet<Cellule>();
@@ -135,6 +140,8 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		}
 	}
 
+	// renvoie la cellule c si celle si est dans raw, et renvoie une morte si
+	// elle n'y est pas
 	public Cellule getCell(Coord c) {
 		int idx = raw.indexOf(c);
 		if (idx == -1)
@@ -178,7 +185,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		}
 		raw = r;
 		update();
-		if (existeHashcode(this.hashcode()) != -1) {
+		if (existeHashcode(this.hashcode) != -1) {
 			if (!(history.contains(this.raw))) {
 				history.add(this.raw);
 			} else
@@ -189,7 +196,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		super.printAl();
 		return this;
 	}
-	
+
 	public Set<Cellule> arrayListToSet(ArrayList<Cellule> Al) {
 
 		Set<Cellule> s = new HashSet<Cellule>();
@@ -209,5 +216,74 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		}
 		t += hl * 0x1000000;
 		return t;
+	}
+	
+	//retourne le nb de voisins d'une cellule
+	public int nbVoisin(Cellule c){
+		int cmpt = 0;
+		Set<Cellule> hs = recupererVoisinage(c);
+			for (Cellule cel : hs) {
+				if (!(cel.equals(c))) {
+					if (cel instanceof Vivante) {
+						cmpt++;
+					}
+				}
+			}
+			return cmpt;
+	}
+	
+	//retourne vrai si une cellule est sur la bordure du tableau de jeu
+	public boolean surBordure(Cellule c,int taille){
+		return (c.x()==0 || c.x()==taille || c.y()==0 || c.y()==taille);
+	}
+	
+	//taille=taille du tableau de jeu circulaire
+	//retourne vrai si une cellule peut vivre dans un tableau circulaire
+	public boolean aliveCirculaire(int taille,Cellule c){
+		int cmpt=0;
+		if(!(surBordure(c,taille))){
+			return alive(c);
+		}
+		
+		if(c.x()==x()){
+			if(c.y()==y()){ //si c.y() == a position initiale de l'ordonnée
+				cmpt=cmpt+nbVoisin(new Vivante(c.x(),c.y()));
+				cmpt=cmpt+nbVoisin(new Vivante(c.x(),taille+1));
+				cmpt=cmpt+nbVoisin(new Vivante(taille+1,taille+1));
+				cmpt=cmpt+nbVoisin(new Vivante(taille+1,c.y()));
+			}
+			else if(c.y()==taille){
+				cmpt=cmpt+nbVoisin(new Vivante(c.x(),c.y()));
+				cmpt=cmpt+nbVoisin(new Vivante(c.x(),y()-1));
+				cmpt=cmpt+nbVoisin(new Vivante(taille+1,y()-1));
+				cmpt=cmpt+nbVoisin(new Vivante(taille+1,c.y()));
+			}
+			else{
+				cmpt=cmpt+nbVoisin(new Vivante(c.x(),c.y()));
+				cmpt=cmpt+nbVoisin(new Vivante(taille+1,c.y()));
+			}
+			
+		}
+		else if(c.x()==taille){
+			if(c.y()==y()){ //si c.y() == a position initiale de l'ordonnée
+				cmpt=cmpt+nbVoisin(new Vivante(c.x(),c.y()));
+				cmpt=cmpt+nbVoisin(new Vivante(c.x(),taille+1));
+				cmpt=cmpt+nbVoisin(new Vivante(x()-1,taille+1));
+				cmpt=cmpt+nbVoisin(new Vivante(x()-1,c.y()));
+			}
+			else if(c.y()==taille){
+				cmpt=cmpt+nbVoisin(new Vivante(c.x(),c.y()));
+				cmpt=cmpt+nbVoisin(new Vivante(c.x(),y()-1));
+				cmpt=cmpt+nbVoisin(new Vivante(x()-1,y()-1));
+				cmpt=cmpt+nbVoisin(new Vivante(x()-1,c.y()));
+			}
+			else{
+				cmpt=cmpt+nbVoisin(new Vivante(c.x(),c.y()));
+				cmpt=cmpt+nbVoisin(new Vivante(x()-1,c.y()));
+			}
+		}
+		if(c instanceof Vivante)
+			return (cmpt==2 || cmpt==3);
+		else return cmpt==3;
 	}
 }
