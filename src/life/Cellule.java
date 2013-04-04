@@ -1,7 +1,7 @@
 package life;
 
 /**
- * classe Cellule qui determine l'état de la Cellule en question dans la coordonnee @Coord
+ * classe Cellule qui determine l'etat de la Cellule en question dans la coordonnee @Coord
  * @see Coord
  * @author Jimmy
  *
