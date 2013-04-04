@@ -1,7 +1,7 @@
 package life;
 
 /**
- * classe Cellule qui détermine l'état de la Cellule en question dans la coordonnée @Coord
+ * classe Cellule qui determine l'état de la Cellule en question dans la coordonnee @Coord
  * @see Coord
  * @author Jimmy
  *
@@ -20,7 +20,7 @@ public abstract class Cellule extends Coord {
 	}
 	/**
 	 * 
-	 * @return un booléen suivant l'état de la Cellule
+	 * @return un booleen suivant l'etat de la Cellule
 	 */
 	public abstract boolean vivante();
 }

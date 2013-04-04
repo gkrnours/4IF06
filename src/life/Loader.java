@@ -34,7 +34,7 @@ public class Loader {
 	}
 
 	/**
-	 * Interprétation du fichier .lif pour le programme
+	 * Interpretation du fichier .lif pour le programme
 	 * @param io
 	 * @return
 	 */

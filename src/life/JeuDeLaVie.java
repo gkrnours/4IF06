@@ -40,9 +40,9 @@ public class JeuDeLaVie {
 	}
 
 	/**
-	 * Méthode de simulation du jeu avec lecture de fichier .lif
-	 * appel d'interface graphique avec prise en compte de différents paramètres
-	 * (nombre de générations, temps ...)
+	 * Methode de simulation du jeu avec lecture de fichier .lif
+	 * appel d'interface graphique avec prise en compte de differents parametres
+	 * (nombre de generations, temps ...)
 	 * @param max
 	 * @param filename
 	 */

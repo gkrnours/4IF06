@@ -55,8 +55,8 @@ public class Coord implements Comparable<Coord> {
 	}
 	/**
 	 * @param other
-	 * @return un entier négatif, zero, ou un entier positive suivant si l'objet est
-	 * inférieur, égal ou supérieur
+	 * @return un entier negatif, zero, ou un entier positive suivant si l'objet est
+	 * inferieur, egal ou superieur
 	 */
 	@Override
 	public int compareTo(Coord other) {
@@ -66,8 +66,8 @@ public class Coord implements Comparable<Coord> {
 			return this.y - other.y();
 	}
 	/**
-	 * méthode equals qui indique si les objets comparés sont sont égaux à l'Objet c
-	 * @return booléen: true si les 2 objets sont égaux, false sinon
+	 * methode equals qui indique si les objets compares sont egaux a l'Objet c
+	 * @return booléen: true si les 2 objets sont egaux, false sinon
 	 */
 	@Override
 	public boolean equals(Object c) {
@@ -85,7 +85,7 @@ public class Coord implements Comparable<Coord> {
 	
 	/**
 	 * toString()
-	 * @return la représentation de l'objet sous forme de chaîne de caractères
+	 * @return la representation de l'objet sous forme de chaine de caracteres
 	 */
 	@Override
 	public String toString(){
