@@ -24,6 +24,11 @@ public class Vivante extends Cellule {
 		super(c);
 	}
 	
+	
+	@Override
+	public Cellule evolve(Integer voisin){
+		return null;
+	}
 	/**
 	 *@return true car nous somme dans la classe Vivante
 	 */

@@ -50,9 +50,9 @@ public class JeuDeLaVie {
 		System.out.println(filename+" for "+max+" turns.");
 		
 		// init 
-		final LIFE life = Loader.read(filename);
+		LIFE life = Loader.read(filename);
 		
-		final Display display = new DisplaySwingTerm(life);
+		Display display = new DisplaySwingTerm(life);
 		display.show();
 		// update 
 		/*
@@ -77,9 +77,12 @@ public class JeuDeLaVie {
 				switch(((DisplaySwingTerm) display).csi.inkey().code){
 				case CharKey.SPACE:
 					if(!life.hasNext()) break;
-					life.next();   
+					life = life.next();
+					display.newLife(life);
 					if(life instanceof LIFE)
-					display.update();
+						display.update();
+					System.out.print(display.i+": ");
+					System.out.println(life);
 					break;
 				case CharKey.k:
 				case CharKey.UARROW:

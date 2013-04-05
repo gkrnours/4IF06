@@ -22,5 +22,6 @@ public abstract class Cellule extends Coord {
 	 * 
 	 * @return un booléen suivant l'état de la Cellule
 	 */
+	public abstract Cellule evolve(Integer voisin);
 	public abstract boolean vivante();
 }

@@ -18,6 +18,7 @@ public class AllLife {
 	}
 	
 	public void printAl(){
+		System.out.print("hashcode list : ");
 		for(Integer i: Al){
 			System.out.print(Al.indexOf(i)+" : "+i+" // ");
 		}

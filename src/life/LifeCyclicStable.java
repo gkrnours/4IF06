@@ -9,7 +9,7 @@ public class LifeCyclicStable extends LIFE {
 	}
 
 	public boolean hasNext() {
-		return raw.size()>0;
+		return false;
 	}
 
 	public LIFE next() {

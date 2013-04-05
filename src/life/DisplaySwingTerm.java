@@ -9,10 +9,9 @@ import net.slashie.libjcsi.wswing.WSwingConsoleInterface;
 public class DisplaySwingTerm extends Display {
 	public ConsoleSystemInterface csi;
 	public String type;
-	private static int i = 0;
-	private static Coord origin = null;
-	private static Coord span = null;
-	private static Integer[] defaut = new Integer[] { 30, 60 };
+	private Coord origin = null;
+	private Coord span = null;
+	private Integer[] defaut = new Integer[] { 30, 60 };
 
 	public DisplaySwingTerm(LIFE life) {
 		super(life);

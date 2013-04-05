@@ -5,8 +5,12 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+enum Type {NORMAL, FRONTIER, SPHERE};
 
 public class LIFE extends AllLife implements Iterator<LIFE> {
+	protected Type type; 
+	protected Coord topLeft;
+	protected Coord bottomRight;
 	protected Integer x; // horizontal position
 	protected Integer y; // vertical position
 	protected Integer w; // width
@@ -14,7 +18,6 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 	protected Float d; // density
 	protected ArrayList<Cellule> raw; // list of living cell
 	protected ArrayList<LIFE> shards;// list of LIFE composing this one
-	protected Integer hashcode = hashcode();
 	protected Set<ArrayList<Cellule>> history;
 
 	public Integer x() {
@@ -98,47 +101,13 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 	public boolean alive(Cellule c) {
 		int cmpt = 0;
 		Set<Cellule> hs = recupererVoisinage(c);
-		if (c instanceof Vivante) {
-			for (Cellule cel : hs) {
-				if (!(cel.equals(c))) {
-					if (cel instanceof Vivante) {
-						cmpt++;
-					}
-				}
-			}
-			return (cmpt == 2 || cmpt == 3);
-		} else {
-			for (Cellule cel : hs) {
-				if (!(cel.equals(c))) {
-					if (cel instanceof Vivante) {
-						cmpt++;
-					}
-				}
-			}
-			return (cmpt == 3);
+		for (Cellule cel : hs) {
+			if (cel.equals(c)) continue;
+			if(cel.vivante()) ++cmpt;
 		}
-
+		return c.evolve(cmpt).vivante();
 	}
 
-	// TODO remove
-	// effectue le tour suivant
-	public void unTour() {
-		ArrayList<Cellule> al = new ArrayList<Cellule>();
-		Set<Cellule> s = new HashSet<Cellule>();
-		for (Cellule c : this.raw) {
-			if (alive(c)) {
-				al.add(new Vivante(c.x(), c.y()));
-			} else
-				al.add(new Morte(c.x(), c.y()));
-			s = recupererVoisinage(c);
-			for (Cellule cel : s) {
-				if (alive(c)) {
-					al.add(new Vivante(cel.x(), cel.y()));
-				} else
-					al.add(new Morte(cel.x(), cel.y()));
-			}
-		}
-	}
 
 	// renvoie la cellule c si celle si est dans raw, et renvoie une morte si
 	// elle n'y est pas
@@ -154,8 +123,9 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		return this.raw.contains(c);
 	}
 
+	@Override
 	public String toString() {
-		return "LIFE [" + x + "/" + y + "] [" + w + "×" + h + ":" + d + "]";
+		return getClass().getName()+" [" + x + "/" + y + "] [" + w + "×" + h + ":" + d + "]";
 	}
 
 	public void debug() {
@@ -173,7 +143,6 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 	}
 
 	public LIFE next() {
-		System.out.println(this + " ");
 		Set<Cellule> work = new HashSet<Cellule>();
 		for (Cellule c : raw) {
 			work.addAll(recupererVoisinage(c));
@@ -185,15 +154,15 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		}
 		raw = r;
 		update();
-		if (existeHashcode(this.hashcode) != -1) {
+		if (existeHashcode(this.hashcode()) != -1) {
 			if (!(history.contains(this.raw))) {
 				history.add(this.raw);
 			} else
 				return new LifePreCyclic(this.raw);
 		} else {
-			super.addAl(this.hashcode());
+			addAl(this.hashcode());
 		}
-		super.printAl();
+		//printAl();
 		return this;
 	}
 
