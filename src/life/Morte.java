@@ -1,7 +1,7 @@
 package life;
 
 /**
- * Classe qui définit l'état d'une @Cellule en morte
+ * Classe qui definit l'etat d'une @Cellule en morte
  * @author Jimmy
  *
  */

@@ -1,7 +1,11 @@
 package life;
 
 import java.util.ArrayList;
-
+/**
+ * classe de pre-detection de cycle
+ * @author
+ *
+ */
 public class LifePreCyclic extends LIFE {
 	protected Integer periode = null;
 	protected Integer current = null;

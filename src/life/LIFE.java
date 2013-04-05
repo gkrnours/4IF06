@@ -45,7 +45,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 	}
 
 	/**
-	 * Mises à jour des coordonnées
+	 * Mises a jour des coordonnees
 	 */
 	private void update() {
 		if (raw.isEmpty())
