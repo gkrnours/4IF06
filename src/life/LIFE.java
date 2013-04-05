@@ -180,8 +180,10 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		}
 		ArrayList<Cellule> r = new ArrayList<Cellule>();
 		for (Cellule cell : work) {
-			if (alive(cell))
-				r.add(cell.vivante() ? cell : new Vivante(cell));
+			Cellule tmp = cell.evolve;
+			if(!tmp instanceof Morte){
+				r.add(tmp)
+			}
 		}
 		raw = r;
 		update();
