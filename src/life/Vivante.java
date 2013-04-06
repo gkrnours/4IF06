@@ -7,6 +7,7 @@ package life;
  */
 public class Vivante extends Cellule {
 
+	private Integer[] vivant={2,3};
 	/**
 	 * constructeur
 	 * @param x
@@ -24,10 +25,14 @@ public class Vivante extends Cellule {
 		super(c);
 	}
 	
-	
+	public static void majVivant(){
+		//msie a jour du tableau vivant
+	}
 	@Override
 	public Cellule evolve(Integer voisin){
-		return null;
+		if(voisin==vivant[0] || voisin==vivant[1])
+			return this;
+		else return new Morte(x(),y());
 	}
 	/**
 	 *@return true car nous somme dans la classe Vivante

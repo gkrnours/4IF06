@@ -7,6 +7,8 @@ package life;
  */
 public class Morte extends Cellule {
 	
+	
+	private Integer vivant = 3;
 	/**
 	 * Constructeur
 	 * @param x
@@ -30,5 +32,11 @@ public class Morte extends Cellule {
 	@Override
 	public boolean vivante() {
 		return false;
+	}
+	@Override
+	public Cellule evolve(Integer voisin){
+		if(voisin == this.vivant)
+			return new Vivante(x(),y());
+		else return this;
 	}
 }
