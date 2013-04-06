@@ -149,9 +149,9 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		}
 		ArrayList<Cellule> r = new ArrayList<Cellule>();
 		for (Cellule cell : work) {
-			Cellule tmp = cell.evolve;
-			if(!tmp instanceof Morte){
-				r.add(tmp)
+			Cellule tmp = cell.evolve(nbVoisin(cell));
+			if(!(tmp instanceof Morte)){
+				r.add(tmp);
 			}
 		}
 		raw = r;
@@ -190,7 +190,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 	}
 	
 	//retourne le nb de voisins d'une cellule
-	public int nbVoisin(Cellule c){
+	public Integer nbVoisin(Cellule c){
 		int cmpt = 0;
 		Set<Cellule> hs = recupererVoisinage(c);
 			for (Cellule cel : hs) {
