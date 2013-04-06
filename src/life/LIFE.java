@@ -83,7 +83,8 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		raw.add(new Vivante(6, 2));
 		update();
 	}
-
+	
+	//renvoie un set contenant les voisinnes de la cellule c, et c
 	public Set<Cellule> recupererVoisinage(Cellule c) {
 		int dx = c.x() - 1;
 		int dy = c.y() - 1;
@@ -168,6 +169,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		return this;
 	}
 
+	//converti un arraylist en set
 	public Set<Cellule> arrayListToSet(ArrayList<Cellule> Al) {
 
 		Set<Cellule> s = new HashSet<Cellule>();
@@ -176,7 +178,8 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		}
 		return s;
 	}
-
+	
+	//retourne un hascode
 	public Integer hashcode() {
 		if (raw == null)
 			return 0;
@@ -202,7 +205,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 			}
 			return cmpt;
 	}
-	
+	/*
 	//retourne vrai si une cellule est sur la bordure du tableau de jeu
 	public boolean surBordure(Cellule c,int taille){
 		return (c.x()==0 || c.x()==taille || c.y()==0 || c.y()==taille);
@@ -257,4 +260,5 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 			return (cmpt==2 || cmpt==3);
 		else return cmpt==3;
 	}
+	*/
 }
