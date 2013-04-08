@@ -190,7 +190,7 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="22" language="java" name="life.TestCellule" project="4IF06" file="/4IF06/src/life/TestCellule.java" 
+  <class id="22" language="java" name="life.TestJunit" project="4IF06" file="/4IF06/src/life/TestJunit.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="197" y="492"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 

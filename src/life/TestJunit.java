@@ -6,7 +6,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-public class TestCellule {
+public class TestJunit {
 
 	/**
 	 * Test de l'initialisation des Vivantes
