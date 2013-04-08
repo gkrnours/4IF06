@@ -30,14 +30,6 @@ public class JeuDeLaVie {
 		for(String line: msg) System.out.println(line);
 	}
 	
-	/**
-	 * Méthode de débogage
-	 */
-	private static void debug(){
-		Coord c = new Coord(0, 0);
-		Coord d = new Coord(0, 0);
-		System.out.println(c.equals(d));
-	}
 
 	/**
 	 * Methode de simulation du jeu avec lecture de fichier .lif
@@ -119,7 +111,6 @@ public class JeuDeLaVie {
 		}
 		switch(args[0]){
 		case "-name": name(); break;
-		case "-d":   debug(); break;
 		case "-s": // Run for X turn
 			Integer max = Integer.parseInt(args[1]);
 			simulate(max, args[2]); 

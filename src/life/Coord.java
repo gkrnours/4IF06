@@ -55,7 +55,7 @@ public class Coord implements Comparable<Coord> {
 	}
 	/**
 	 * @param other
-	 * @return un entier negatif, zero, ou un entier positive suivant si l'objet est
+	 * @return un entier negatif, zero, ou un entier positif suivant si l'objet est
 	 * inferieur, egal ou superieur
 	 */
 	@Override

@@ -45,7 +45,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 	}
 
 	/**
-	 * Mises a jour des coordonnees
+	 * Mise a jour des coordonnees
 	 */
 	private void update() {
 		if (raw.isEmpty())
@@ -66,21 +66,6 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 	public LIFE(ArrayList<Cellule> cells) {
 		raw = cells;
 		history = new HashSet<ArrayList<Cellule>>();
-		update();
-	}
-
-	/**
-	 * constructeur
-	 */
-	public LIFE() {
-		raw = new ArrayList<Cellule>();
-		raw.add(new Vivante(0, 1));
-		raw.add(new Vivante(1, 1));
-		raw.add(new Vivante(6, 0));
-		raw.add(new Vivante(1, 2));
-		raw.add(new Vivante(5, 2));
-		raw.add(new Vivante(7, 2));
-		raw.add(new Vivante(6, 2));
 		update();
 	}
 	
