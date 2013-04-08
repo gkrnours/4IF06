@@ -1,7 +1,6 @@
 package life;
 
 import java.util.ArrayList;
-import java.util.List;
 /**
  * classe qui determine un cycle non-stable
  *
