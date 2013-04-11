@@ -46,9 +46,4 @@ public class LifePreCyclic extends LIFE {
 
 		return this;
 	}
-
-	@Override
-	public String toString() {
-		return getClass().getName()+" [" + x + "/" + y + "] [" + w + "×" + h + ":" + d + "]";
-	}
 }
