@@ -82,7 +82,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 				new Coord(c.x()-1, c.y()),
 				new Coord(c.x()-1, c.y()+1),
 				new Coord(c.x(),   c.y()-1),
-				
+				new Coord(c.x(), c.y()), //TODO good or not?
 				new Coord(c.x(),   c.y()+1),
 				new Coord(c.x()+1, c.y()-1),
 				new Coord(c.x()+1, c.y()),
