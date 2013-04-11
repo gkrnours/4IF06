@@ -2,6 +2,7 @@ package life;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -111,7 +112,12 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 
 	@Override
 	public String toString() {
-		return getClass().getName()+" [" + x + "/" + y + "] [" + w + "×" + h + ":" + d + "]";
+		HashMap<Class, String> name = new HashMap<Class, String>();
+		name.put(LIFE.class, "Normal");
+		name.put(LifePreCyclic.class, "Asymptotique");
+		name.put(LifeCyclic.class, "Cyclique");
+		String ret=name.get(getClass());
+		return ret+" [" + x + "/" + y + "] [" + w + "×" + h + ":" + d + "]";
 	}
 
 	public void debug() {
