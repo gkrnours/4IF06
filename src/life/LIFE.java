@@ -70,7 +70,11 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		update();
 	}
 	
-	//renvoie un set contenant les voisinnes de la cellule c, et c
+	/**
+	 * Creation d'un Set contenant les voisines de la Cellule c et c
+	 * @param c
+	 * @return un Set de Cellules
+	 */
 	public Set<Cellule> recupererVoisinage(Cellule c) {
 		int dx = c.x() - 1;
 		int dy = c.y() - 1;
@@ -83,8 +87,12 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		return s;
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @return retourne vrai si la Cellule c peut vivre, faux sinon
+	 */
 	// TODO supprimer la duplication de code
-	// retourne vrai si la cellule c peut vivre, faux sinon
 	public boolean alive(Cellule c) {
 		int cmpt = 0;
 		Set<Cellule> hs = recupererVoisinage(c);
@@ -95,9 +103,11 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		return c.evolve(cmpt).vivante();
 	}
 
-
-	// renvoie la cellule c si celle si est dans raw, et renvoie une morte si
-	// elle n'y est pas
+	/**
+	 * Renvoie une Cellule a condition qu'elle existe
+	 * @param c
+	 * @return la Cellule c si elle est dans raw, une morte sinon
+	*/
 	public Cellule getCell(Coord c) {
 		int idx = raw.indexOf(c);
 		if (idx == -1)
@@ -106,6 +116,11 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 			return raw.get(idx);
 	}
 
+	/**
+	 * Controle la presence d'une Coord dans raw
+	 * @param c
+	 * @return la presence dans raw
+	 */
 	public boolean existe(Coord c) {
 		return this.raw.contains(c);
 	}
@@ -127,6 +142,10 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		System.out.println();
 	}
 
+	/**
+	 * Verifie la presence d'une etape suivante
+	 * return la positivite de raw.size
+	 */
 	public boolean hasNext() {
 		return 0 < raw.size();
 	}
@@ -160,7 +179,11 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		return this;
 	}
 
-	//converti un arraylist en set
+	/**
+	 * Converti une ArrayList en Set
+	 * @param Al
+	 * @return un Set
+	 */
 	public Set<Cellule> arrayListToSet(ArrayList<Cellule> Al) {
 
 		Set<Cellule> s = new HashSet<Cellule>();
@@ -170,7 +193,10 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		return s;
 	}
 	
-	//retourne un hascode
+	/**
+	 * CRee un hashcode correspondant au nombre et a la position des Cellules
+	 * @return un hashcode
+	 */
 	public Integer hashcode() {
 		if (raw == null)
 			return 0;
@@ -183,7 +209,11 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		return t;
 	}
 	
-	//retourne le nb de voisins d'une cellule
+	/**
+	 * Compte le nombre de voisin d'une Cellule
+	 * @param c
+	 * @return nombre de voisins d'une Cellule
+	 */
 	public Integer nbVoisin(Cellule c){
 		int cmpt = 0;
 		Set<Cellule> hs = recupererVoisinage(c);

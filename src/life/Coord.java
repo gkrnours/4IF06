@@ -41,14 +41,36 @@ public class Coord implements Comparable<Coord> {
 		this.y = c.y();
 	}
 	
+	/**
+	 * Verifie la presence d'une Coord aux coordonnées indiquees
+	 * @param x
+	 * @param y
+	 * @return egalite des coordonnees
+	 */
 	public boolean isAt(int x, int y) {
 		return this.x == x && this.y == y;
 	}
 	
+	/**
+	 * Verifie la présence d'une Coord dans un rectangle compose par deux 
+	 * autres Coord
+	 * @param a
+	 * @param b
+	 * @return isIn(a.x(), a.y(), b.x(), b.y())
+	 */
 	public boolean isIn(Coord a, Coord b) {
 		return isIn(a.x(), a.y(), b.x(), b.y());
 	}
 	
+	/**
+	 * Verifie la presence d'un point dans un rectangle forme par quatre autres 
+	 * points
+	 * @param ax
+	 * @param ay
+	 * @param bx
+	 * @param by
+	 * @return 
+	 */
 	public boolean isIn(int ax, int ay, int bx, int by) {
 		return !(x < ax || y < ay
 			||	bx < x || by < y );
@@ -75,18 +97,11 @@ public class Coord implements Comparable<Coord> {
 		return (x == ((Coord)c).x() && y == ((Coord)c).y());
 	}
 	
-	/**
-	 * 
-	 */
 	@Override
 	public int hashCode(){
 		return (x+0xFFF)+y;
 	}
 	
-	/**
-	 * toString()
-	 * @return la representation de l'objet sous forme de chaine de caracteres
-	 */
 	@Override
 	public String toString(){
 		String r = super.toString();
@@ -94,7 +109,7 @@ public class Coord implements Comparable<Coord> {
 	}
 
 	/**
-	 * Comparateur
+	 * Comparateur de la coordonee x de deux Coord
 	 * @author 
 	 *
 	 */
@@ -105,7 +120,7 @@ public class Coord implements Comparable<Coord> {
 	}
 
 	/**
-	 * Comparateur
+	 * Comparateur de la coordonee y de deux Coord
 	 * @author 
 	 *
 	 */

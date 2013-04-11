@@ -30,6 +30,9 @@ public class TestJunit {
 		Assert.assertFalse(a.vivante());
 	}
 
+	/**
+	 * Test de isAt
+	 */
 	@Test
 	public void TestIsAt() {
 		Coord c = new Coord(1, 2);
@@ -37,6 +40,9 @@ public class TestJunit {
 		Assert.assertFalse(!c.isAt(1, 2));
 	}
 
+	/**
+	 * Test de isIn
+	 */
 	@Test
 	public void TestIsIn() {
 		Coord c = new Coord(5, 10);
@@ -48,6 +54,9 @@ public class TestJunit {
 		Assert.assertFalse(c.isIn(coor, coord));
 	}
 
+	/**
+	 * Test de compareTo
+	 */
 	@Test
 	public void TestCompareTo() {
 		Coord c = new Coord(5, 10);
@@ -61,6 +70,9 @@ public class TestJunit {
 		Assert.assertTrue(0 < c.compareTo(c3));
 	}
 
+	/**
+	 * Test de equals
+	 */
 	@Test
 	public void TestEquals(){
 		Coord c = new Coord (1,2);
@@ -71,6 +83,9 @@ public class TestJunit {
 		Assert.assertFalse(c.equals(i));
 	}
 	
+	/**
+	 * Test de compareX
+	 */
 	@Test
 	public void TestCompareX(){
 		Comparator<Coord> cmp = new Coord.compareX();
@@ -80,6 +95,9 @@ public class TestJunit {
 		Assert.assertFalse(cmp.compare(c, c1) == 0);
 	}
 	
+	/**
+	 * Test de compareY
+	 */
 	@Test
 	public void TestCompareY(){
 		Comparator<Coord> cmp = new Coord.compareY();
