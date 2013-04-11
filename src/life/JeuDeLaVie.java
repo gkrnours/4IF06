@@ -69,12 +69,15 @@ public class JeuDeLaVie {
 				switch(((DisplaySwingTerm) display).csi.inkey().code){
 				case CharKey.SPACE:
 					if(!life.hasNext()) break;
+					System.out.println(life);
+					long t1 = System.currentTimeMillis();
 					life = life.next();
+					long t2 = System.currentTimeMillis();
 					display.newLife(life);
 					if(life instanceof LIFE)
 						display.update();
 					System.out.print(display.i+": ");
-					System.out.println(life);
+					System.out.println((t2-t1)+"µs");
 					break;
 				case CharKey.k:
 				case CharKey.UARROW:

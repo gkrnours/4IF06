@@ -1,6 +1,7 @@
 package life;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -71,13 +72,35 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 	
 	//renvoie un set contenant les voisinnes de la cellule c, et c
 	public Set<Cellule> recupererVoisinage(Cellule c) {
-		int dx = c.x() - 1;
-		int dy = c.y() - 1;
-
+		Coord[] todo = {
+				new Coord(c.x()-1, c.y()-1),
+				new Coord(c.x()-1, c.y()),
+				new Coord(c.x()-1, c.y()+1),
+				new Coord(c.x(),   c.y()-1),
+				
+				new Coord(c.x(),   c.y()+1),
+				new Coord(c.x()+1, c.y()-1),
+				new Coord(c.x()+1, c.y()),
+				new Coord(c.x()+1, c.y()+1),
+		};
+		ArrayList<Cellule> tmp = new ArrayList<>();
+		for(Cellule cell: raw){
+			if(cell.compareTo(todo[0]) < 0) continue;
+			if(0 < cell.compareTo(todo[7]) ) break;
+			tmp.add(cell);
+		}
 		Set<Cellule> s = new HashSet<Cellule>();
-		for (int i = 0; i < 9; ++i) {
-			Cellule cell = getCell(new Coord(dx + (i % 3), dy + (i / 3)));
-			s.add(cell);
+
+		for(Coord t: todo){
+			boolean morte = true;
+			for(Cellule cell: tmp){
+				if(t.equals(cell)){
+					s.add(cell);
+					morte = false;
+					break;
+				}
+			}
+			if(morte) s.add(new Morte(t));
 		}
 		return s;
 	}
@@ -111,7 +134,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 
 	@Override
 	public String toString() {
-		return getClass().getName()+" [" + x + "/" + y + "] [" + w + "×" + h + ":" + d + "]";
+		return getClass().getName()+" [" + x + "/" + y + "] [" + w + "×" + h + ":" + d + "="+raw.size()+"]";
 	}
 
 	public void debug() {
