@@ -1,4 +1,4 @@
-package life;
+package life.test;
 
 import java.util.Comparator;
 
@@ -9,7 +9,7 @@ import life.cell.Vivante;
 
 import org.junit.Test;
 
-public class TestJunit {
+public class CellTest {
 
 	/**
 	 * Test de l'initialisation des Vivantes
