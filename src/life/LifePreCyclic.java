@@ -1,6 +1,8 @@
 package life;
 
 import java.util.ArrayList;
+
+import life.cell.Cellule;
 /**
  * classe de pre-detection de cycle
  * @author

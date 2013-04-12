@@ -1,6 +1,10 @@
-package life;
+package life.display;
 
 import java.util.Iterator;
+
+import life.LIFE;
+import life.cell.Cellule;
+import life.cell.Coord;
 
 import net.slashie.libjcsi.CSIColor;
 import net.slashie.libjcsi.ConsoleSystemInterface;
@@ -75,15 +79,13 @@ public class DisplaySwingTerm extends Display {
 
 	public int[] ousuisje() {
 		int[] r = { 0, 0, 0, 0 };
-		r[0] = origin.x;
+		r[0] = origin.x();
 		return r;
 	}
 
 	public void move(Coord delta) {
-		origin.x += delta.x;
-		origin.y += delta.y;
-		span.x += delta.x;
-		span.y += delta.y;
+		origin = new Coord(origin.x() + delta.x(), origin.y() + delta.y());
+		span   = new Coord(span.x() + delta.x(), span.y() + delta.y());
 		try {
 			refresh();
 		} catch (Exception e) {
@@ -98,10 +100,8 @@ public class DisplaySwingTerm extends Display {
 
 	@Override
 	public void view(Coord topLeft, Coord bottomRight) {
-		origin.x = topLeft.x;
-		origin.y = topLeft.y;
-		span.x = bottomRight.x;
-		span.y = bottomRight.y;
+		origin = new Coord(origin.x() + topLeft.x(), origin.y() + topLeft.y());
+		span   = new Coord(span.x()+bottomRight.x(), span.x()+bottomRight.y());
 		csi.cls();
 		refresh();
 	}

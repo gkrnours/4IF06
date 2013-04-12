@@ -1,4 +1,5 @@
-package life;
+package life.cell;
+
 
 /**
  * classe Cellule qui determine l'etat de la Cellule en question dans la coordonnee @Coord

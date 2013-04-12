@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
+import life.cell.Cellule;
+import life.cell.Coord;
+import life.cell.Morte;
 enum Type {NORMAL, FRONTIER, SPHERE};
 
 public class LIFE extends AllLife implements Iterator<LIFE> {

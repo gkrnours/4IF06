@@ -1,4 +1,5 @@
-package life;
+package life.cell;
+
 
 /**
  * Classe qui definit l'etat d'une @Cellule en vivante

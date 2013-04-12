@@ -1,5 +1,8 @@
 package life;
 
+import life.cell.Coord;
+import life.display.Display;
+import life.display.DisplaySwingTerm;
 import net.slashie.libjcsi.CharKey;
 
 /**

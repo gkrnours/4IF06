@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import life.cell.Cellule;
+import life.cell.Vivante;
+
 /**
  * Classe de chargement d'un fichier au format .lif
  * @author 

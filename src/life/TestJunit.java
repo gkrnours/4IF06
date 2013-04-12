@@ -3,6 +3,9 @@ package life;
 import java.util.Comparator;
 
 import junit.framework.Assert;
+import life.cell.Coord;
+import life.cell.Morte;
+import life.cell.Vivante;
 
 import org.junit.Test;
 

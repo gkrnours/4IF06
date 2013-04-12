@@ -1,6 +1,10 @@
-package life;
+package life.display;
 
 import java.util.Iterator;
+
+import life.LIFE;
+import life.cell.Cellule;
+import life.cell.Coord;
 
 import net.slashie.libjcsi.CSIColor;
 import net.slashie.libjcsi.ConsoleSystemInterface;

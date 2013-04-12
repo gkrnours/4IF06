@@ -1,4 +1,7 @@
-package life;
+package life.display;
+
+import life.LIFE;
+import life.cell.Coord;
 
 public abstract class Display {
 	protected LIFE life;
