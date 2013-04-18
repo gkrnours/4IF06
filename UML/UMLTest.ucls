@@ -3,12 +3,21 @@
   associations="true" dependencies="false" nesting-relationships="true">  
   <package id="1" language="java" name="life.test" project="4IF06" file="/4IF06/src/life/test" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="64" y="53"/>    
+    <position height="-1" width="-1" x="498" y="37"/>    
     <display autosize="true" stereotype="true" accessors="true"/>  
   </package>  
-  <class id="2" language="java" name="life.test.CellTest" project="4IF06" file="/4IF06/src/life/test/CellTest.java" 
+  <class id="2" language="java" name="life.test.LifeTest" project="4IF06" file="/4IF06/src/life/test/LifeTest.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="220" y="185"/>    
+    <position height="-1" width="-1" x="108" y="192"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="life.test.CellTest" project="4IF06" file="/4IF06/src/life/test/CellTest.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="273" y="219"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
