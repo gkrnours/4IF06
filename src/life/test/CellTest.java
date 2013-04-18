@@ -225,6 +225,7 @@ public class CellTest {
 		raw.add(c3);
 		LIFE life = new LIFE(raw);
 		life.next();
+		Assert.assertTrue(life.size()==4);					// Il y a 4 Cellule
 		Assert.assertTrue(life.existe(c));					// Chaque Cellule 
 		Assert.assertTrue(life.existe(c1));					// est bien à la 
 		Assert.assertTrue(life.existe(c2));					// bonne position.
@@ -237,8 +238,9 @@ public class CellTest {
 		raw.add(c4);
 		raw.add(c5);
 		raw.add(c6);
-		LIFE life2 = new LIFE(new ArrayList<Cellule>());
+		LIFE life2 = new LIFE(raw);
 		life2.next();
+		Assert.assertTrue(life2.size()==3);					// Il y a 3 Cellule	
 		Assert.assertTrue(life2.existe(new Vivante(-1,1)));	// Chaque Cellule
 		Assert.assertTrue(life2.existe(c5));				// est bien à la
 		Assert.assertTrue(life2.existe(new Vivante(1,1)));	// bonne position.

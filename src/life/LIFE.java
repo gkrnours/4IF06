@@ -49,6 +49,10 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		return raw.iterator();
 	}
 
+	public int size(){
+		return raw.size();
+	}
+	
 	/**
 	 * constructeur
 	 * 
