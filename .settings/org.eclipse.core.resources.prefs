@@ -1,6 +1,4 @@
 eclipse.preferences.version=1
 encoding//src/life=UTF-8
-encoding//src/life/Coord.java=UTF-8
-encoding//src/life/DisplayVT100.java=UTF-8
 encoding//src/life/JeuDeLaVie.java=UTF-8
 encoding//src/life/LIFE.java=UTF-8

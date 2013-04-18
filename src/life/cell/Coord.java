@@ -1,4 +1,4 @@
-package life;
+package life.cell;
 
 import java.util.Comparator;
 
