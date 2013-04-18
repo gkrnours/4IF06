@@ -2,6 +2,8 @@ package life;
 
 import java.util.ArrayList;
 
+import life.cell.Cellule;
+
 public class Enterprise extends LifeCyclic {
 
 	public Enterprise(ArrayList<Cellule> raw, ArrayList<ArrayList<Cellule>> h,

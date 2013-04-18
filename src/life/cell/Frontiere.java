@@ -1,16 +1,21 @@
-package life;
+package life.cell;
 
-public class Jumelle extends Cellule {
 
-	public Jumelle(Integer x, Integer y) {
-		super(x, y);
+public class Frontiere extends Cellule {
+
+	public Frontiere(Coord c) {
+		super(c);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public Frontiere(Integer x, Integer y){
+		super(x,y);
 	}
 
 	@Override
 	public Cellule evolve(Integer voisin) {
 		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 	@Override

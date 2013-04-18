@@ -1,5 +1,10 @@
 package life;
 
+import life.cell.Coord;
+import life.display.Display;
+import life.display.DisplayCurse;
+import life.display.DisplaySwingTerm;
+import life.display.DisplayTTY;
 import net.slashie.libjcsi.CharKey;
 
 /**
@@ -8,6 +13,7 @@ import net.slashie.libjcsi.CharKey;
  *
  */
 public class JeuDeLaVie {
+	private static Class<? extends Display> engine = DisplayTTY.class;
 	private static void help(){
 		String[] msg = {
 			"Usage: [-name -h] [-s -c -w] TURN FILE",
@@ -44,53 +50,44 @@ public class JeuDeLaVie {
 		// init 
 		LIFE life = Loader.read(filename);
 		
-		Display display = new DisplaySwingTerm(life);
+		Display display;
+		try{
+			display = (Display)engine.newInstance();
+		}catch(Exception e){
+			display = new DisplayTTY();
+		}
+		display.update(life);
 		display.show();
-		// update 
-		/*
-		final Timer runner = new Timer();
-		final TimerTask update = new TimerTask(){
-			@Override
-			public void run() {
-				if(!life.hasNext() || max < ++turn.cpt){
-					runner.cancel();
-					runner.purge();
-					return;
-				}
-				life.next();
-				display.update();
-			}
-		};
-		runner.schedule(update, 1000, 1000);
-		*/
-		if(display instanceof DisplaySwingTerm){
+		if(display instanceof DisplayCurse){
 			boolean forest = true;
 			while(forest){
-				switch(((DisplaySwingTerm) display).csi.inkey().code){
+				switch(((DisplayCurse) display).csi.inkey().code){
 				case CharKey.SPACE:
 					if(!life.hasNext()) break;
-					life = life.next();
-					display.newLife(life);
-					if(life instanceof LIFE)
-						display.update();
-					System.out.print(display.i+": ");
 					System.out.println(life);
+					long t1 = System.currentTimeMillis();
+					life = life.next();
+					long t2 = System.currentTimeMillis();
+					display.update(life);
+					if(life instanceof LIFE)
+						display.refresh();
+					System.out.println((t2-t1)+"µs");
 					break;
 				case CharKey.k:
 				case CharKey.UARROW:
-					((DisplaySwingTerm) display).move(new Coord( 1, 0));
+					((DisplayCurse) display).move(new Coord( 1, 0));
 					break;
 				case CharKey.j:
 				case CharKey.DARROW:
-					((DisplaySwingTerm) display).move(new Coord(-1, 0));
+					((DisplayCurse) display).move(new Coord(-1, 0));
 					break;
 				case CharKey.h:
 				case CharKey.LARROW:
-					((DisplaySwingTerm) display).move(new Coord( 0, 1));
+					((DisplayCurse) display).move(new Coord( 0, 1));
 					break;
 				case CharKey.l:
 				case CharKey.RARROW:
-					((DisplaySwingTerm) display).move(new Coord( 0,-1));
+					((DisplayCurse) display).move(new Coord( 0,-1));
 					break;
 				case CharKey.ESC:
 					forest = false;
@@ -112,6 +109,7 @@ public class JeuDeLaVie {
 		switch(args[0]){
 		case "-name": name(); break;
 		case "-s": // Run for X turn
+			engine = DisplaySwingTerm.class;
 			Integer max = Integer.parseInt(args[1]);
 			simulate(max, args[2]); 
 			break;
