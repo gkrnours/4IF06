@@ -1,6 +1,6 @@
 package life;
 
-import java.util.Comparator;
+import java.util.*;
 
 import junit.framework.Assert;
 
@@ -74,38 +74,160 @@ public class TestJunit {
 	 * Test de equals
 	 */
 	@Test
-	public void TestEquals(){
-		Coord c = new Coord (1,2);
-		Coord c1 = new Coord (3,4);
+	public void TestEquals() {
+		Coord c = new Coord(1, 2);
+		Coord c1 = new Coord(3, 4);
 		int i = 2;
 		Assert.assertTrue(c.equals(c));
 		Assert.assertFalse(c.equals(c1));
 		Assert.assertFalse(c.equals(i));
 	}
-	
+
 	/**
 	 * Test de compareX
 	 */
 	@Test
-	public void TestCompareX(){
+	public void TestCompareX() {
 		Comparator<Coord> cmp = new Coord.compareX();
-		Coord c = new Coord (1,2);
-		Coord c1 = new Coord (2,2);
+		Coord c = new Coord(1, 2);
+		Coord c1 = new Coord(2, 2);
 		Assert.assertTrue(cmp.compare(c, c) == 0);
 		Assert.assertFalse(cmp.compare(c, c1) == 0);
 	}
-	
+
 	/**
 	 * Test de compareY
 	 */
 	@Test
-	public void TestCompareY(){
+	public void TestCompareY() {
 		Comparator<Coord> cmp = new Coord.compareY();
-		Coord c = new Coord (1,2);
-		Coord c1 = new Coord (2,1);
+		Coord c = new Coord(1, 2);
+		Coord c1 = new Coord(2, 1);
 		Assert.assertTrue(cmp.compare(c, c) == 0);
 		Assert.assertFalse(cmp.compare(c, c1) == 0);
 	}
-	
-	
+
+	// LIFE.java
+
+	/**
+	 * Test de nbVoisin et implicitement de recupererVoisinage et getCell
+	 */
+	@Test
+	public void TestNbVoisin() {
+		LIFE life = new LIFE(new ArrayList<Cellule>());
+		Cellule c = new Vivante(1, 1);
+		Cellule c1 = new Vivante(1, 2);
+		Cellule c2 = new Vivante(1, 7);
+		Cellule c3 = new Morte(2, 2);
+		life.raw.add(c);
+		life.raw.add(c1);
+		life.raw.add(c2);
+		life.raw.add(c3);
+		Assert.assertTrue(life.nbVoisin(c) == 1);
+		Assert.assertTrue(life.nbVoisin(c2) == 0);
+		Assert.assertTrue(life.nbVoisin(c3) == 2);
+	}
+
+	/**
+	 * Test de alive et implicitement de evolve
+	 */
+	@Test
+	public void TestAlive() {
+		LIFE life = new LIFE(new ArrayList<Cellule>());
+		Cellule c = new Vivante(1, 1);
+		Cellule c1 = new Vivante(1, 2);
+		Cellule c2 = new Vivante(2, 1);
+		Cellule c3 = new Vivante(1, 0);
+		Cellule c4 = new Vivante(5, 2);
+		Cellule c5 = new Morte(0, 1);
+		Cellule c6 = new Morte(0, 2);
+		life.raw.add(c);
+		life.raw.add(c1);
+		life.raw.add(c2);
+		life.raw.add(c3);
+		life.raw.add(c4);
+		life.raw.add(c5);
+		life.raw.add(c6);
+		Assert.assertTrue(life.alive(c1));
+		Assert.assertTrue(life.alive(c3));
+		Assert.assertFalse(life.alive(c4));
+		Assert.assertTrue(life.alive(c5));
+		Assert.assertFalse(life.alive(c6));
+	}
+
+	/**
+	 * Test de existe
+	 */
+	@Test
+	public void TestContains() {
+		LIFE life = new LIFE(new ArrayList<Cellule>());
+		Cellule c = new Vivante(1, 1);
+		Cellule c1 = new Morte(1, 2);
+		life.raw.add(c);
+		life.raw.add(c1);
+		Assert.assertTrue(life.existe(c));
+		Assert.assertTrue(life.existe(c1));
+		Assert.assertFalse(life.existe(new Vivante(1, 4)));
+	}
+
+	/**
+	 * Test de hasNext en utilisant un carre et un life vide (on sait qu'un
+	 * carre de 2 par 2 est une figure qui ne change pas en Jeu de la vie et a
+	 * donc forcement un next tandis qu'un life sans cellules ne peut avoir de
+	 * next)
+	 */
+	@Test
+	public void TestHasNext() {
+		LIFE life = new LIFE(new ArrayList<Cellule>());
+		Cellule c = new Vivante(0, 0);
+		Cellule c1 = new Vivante(0, 1);
+		Cellule c2 = new Vivante(1, 1);
+		Cellule c3 = new Vivante(1, 0);
+		life.raw.add(c);
+		life.raw.add(c1);
+		life.raw.add(c2);
+		life.raw.add(c3);
+		Assert.assertTrue(life.hasNext());
+		LIFE life2 = new LIFE(new ArrayList<Cellule>());
+		Assert.assertFalse(life2.hasNext());
+		life.next();
+	}
+
+	/**
+	 * Test de next. On utilise des dispositions dont on connait l'étape
+	 * suivante afin de pouvoir vérifier l'exactitude de la méthode. Ici, on
+	 * utilise un carre de 2 par 2 car il n'evolue pas et next=disposition
+	 * actuelle, et une ligne de 3 Vivante car on sait que cette disposition
+	 * doit donner une colonne de 3 Vivante avec le même milieu que la ligne.
+	 */
+	@Test
+	public void TestNext() {
+		LIFE life = new LIFE(new ArrayList<Cellule>());
+		Cellule c = new Vivante(0, 0);
+		Cellule c1 = new Vivante(0, 1);
+		Cellule c2 = new Vivante(1, 1);
+		Cellule c3 = new Vivante(1, 0);
+		life.raw.add(c);
+		life.raw.add(c1);
+		life.raw.add(c2);
+		life.raw.add(c3);
+		life.next();
+		Assert.assertTrue(life.raw.size()==4);				// Il y a 4 Cellule.
+		Assert.assertTrue(life.existe(c));					// Chaque Cellule 
+		Assert.assertTrue(life.existe(c1));					// est bien à la 
+		Assert.assertTrue(life.existe(c2));					// bonne position.
+		Assert.assertTrue(life.existe(c3));					
+		LIFE life2 = new LIFE(new ArrayList<Cellule>());
+		Cellule c4 = new Vivante(0, 0);
+		Cellule c5 = new Vivante(0, 1);
+		Cellule c6 = new Vivante(0, 2);
+		life2.raw.add(c4);
+		life2.raw.add(c5);
+		life2.raw.add(c6);
+		life2.next();
+		Assert.assertTrue(life2.raw.size()==3);				// Il y a 3 Cellule
+		Assert.assertTrue(life2.existe(new Vivante(-1,1)));	// Chaque Cellule
+		Assert.assertTrue(life2.existe(c5));				// est bien à la
+		Assert.assertTrue(life2.existe(new Vivante(1,1)));	// bonne position.
+	}
 }

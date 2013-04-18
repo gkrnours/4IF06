@@ -121,7 +121,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 	 * @param c
 	 * @return la presence dans raw
 	 */
-	public boolean existe(Coord c) {
+	public boolean existe(Cellule c) {
 		return this.raw.contains(c);
 	}
 
@@ -131,6 +131,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 		name.put(LIFE.class, "Normal");
 		name.put(LifePreCyclic.class, "Asymptotique");
 		name.put(LifeCyclic.class, "Cyclique");
+		// Avec test1.lif ça plante
 		String ret=name.get(getClass());
 		return ret+" [" + x + "/" + y + "] [" + w + "×" + h + ":" + d + "]";
 	}
@@ -194,7 +195,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 	}
 	
 	/**
-	 * CRee un hashcode correspondant au nombre et a la position des Cellules
+	 * Cree un hashcode correspondant au nombre et a la position des Cellules
 	 * @return un hashcode
 	 */
 	public Integer hashcode() {
@@ -210,7 +211,7 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 	}
 	
 	/**
-	 * Compte le nombre de voisin d'une Cellule
+	 * Compte le nombre de voisins d'une Cellule
 	 * @param c
 	 * @return nombre de voisins d'une Cellule
 	 */
