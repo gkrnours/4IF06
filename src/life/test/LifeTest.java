@@ -13,7 +13,13 @@ import life.cell.Vivante;
 
 import org.junit.Test;
 
+/**
+ * Class qui teste les fonctions en rapport avec le package life
+ */
+
 public class LifeTest {
+	// Tests sur LIFE.java
+	
 	/**
 	 * Test de nbVoisin et implicitement de recupererVoisinage et getCell
 	 */
@@ -144,4 +150,7 @@ public class LifeTest {
 		Assert.assertTrue(life2.existe(c5));				// est bien à la
 		Assert.assertTrue(life2.existe(new Vivante(1,1)));	// bonne position.
 	}
+
+	
+	
 }

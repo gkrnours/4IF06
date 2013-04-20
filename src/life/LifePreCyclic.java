@@ -28,7 +28,7 @@ public class LifePreCyclic extends LIFE {
 	@Override
 	public LIFE next() {
 		if (periode == null) {// c'est la premiere fois qu'on le rencontre
-			super.next(); // pourquoi on fait letape suivante ????
+			super.next(); 
 			if (!history.get(0).equals(raw)) {
 				history.add(raw);
 			} 

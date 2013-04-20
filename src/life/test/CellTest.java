@@ -12,6 +12,9 @@ import life.cell.Vivante;
 
 import org.junit.Test;
 
+/**
+ * Class qui teste les fonctions en rapport avec le package life.cell
+ */
 public class CellTest {
 
 	/**
@@ -112,4 +115,5 @@ public class CellTest {
 		Assert.assertTrue(cmp.compare(c, c) == 0);
 		Assert.assertFalse(cmp.compare(c, c1) == 0);
 	}
+	
 }
