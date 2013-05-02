@@ -43,13 +43,19 @@ implements Display {
 	}
 
 	public void refresh() {
+		System.out.println("data: "+data);
 		Iterator<Cellule> raw = data.raw();
-		Coord next = (raw.hasNext()) ? raw.next() : null;
+		int oy = origin.y(), sy = oy+span.y();
+		int ox = origin.x(), sx = ox+span.x();
+		Coord next;
+		do{
+			next = (raw.hasNext()) ? raw.next() : null;
+		}while(next != null && !next.isIn(ox, oy, sx, sy));
 		// continuer tant que l'on est pas dans origin <> span
 		csi.cls();
 		boolean todo = true;
-		for (int y = 0, oy = origin.y(), yp = oy+span.y(); y < yp; ++y) {
-			for (int x = 0, ox = origin.x(), xp =ox+span.x(); x < xp; ++x) {
+		for (int y = 0; y < sy; ++y) {
+			for (int x = 0; x < sx; ++x) {
 				if(todo){
 					todo = false;
 				}
@@ -57,7 +63,7 @@ implements Display {
 					csi.print(x, y, utf8[1], CSIColor.FUCSHIA_PINK);
 					do{
 						next = (raw.hasNext()) ? raw.next() : null;
-					}while(next != null && !next.isIn(ox, oy, xp, yp));
+					}while(next != null && !next.isIn(ox, oy, sx, sy));
 				}
 			}
 		}
