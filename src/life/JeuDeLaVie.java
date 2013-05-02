@@ -1,5 +1,10 @@
 package life;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import life.cell.Coord;
 import life.display.Display;
 import life.display.DisplayCurse;
@@ -111,6 +116,38 @@ public class JeuDeLaVie {
 	}
 	
 	/**
+	 * Calcul l'évolution de tout les fichiers d'un répertoire et crée un 
+	 * fichier html contenant le résultat
+	 */
+	public static void wall(final Integer max, String filename){
+		File dir = new File(filename);
+		File[] lifs = dir.listFiles();
+	try {
+		BufferedWriter out = new BufferedWriter(new FileWriter("OUTPUT.HTML"));
+		out.write("<pre>", 0, 3);
+		out.newLine();
+		for(File lif :lifs){
+			LIFE life = Loader.read(lif.toString());
+			for(int i=0; 
+				i<max && life.hasNext() && !(life instanceof Asymptotique);
+				++i)
+			{
+				life = life.next();
+			}
+			String rapport = life.rapport();
+			out.write(lif.toString(), 0, lif.toString().length());
+			out.newLine();
+			out.write("\t"+rapport, 0, ("\t"+rapport).length());
+			out.newLine();
+			out.newLine();
+		}
+		out.close();
+	} catch (IOException e) {
+			e.printStackTrace();
+	}
+	}
+	
+	/**
 	 * Main
 	 * @param args
 	 */
@@ -130,7 +167,7 @@ public class JeuDeLaVie {
 			calculate(max, args[2]); 
 			break;
 		case "-w": // analyse all setup in a directory in X turn or less
-			// TODO analyse folder
+			wall(max, args[2]);
 			break;
 		default: help();
 		}
