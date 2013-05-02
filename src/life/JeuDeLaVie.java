@@ -9,7 +9,6 @@ import net.slashie.libjcsi.CharKey;
 
 /**
  * Classe qui lance le jeu de la vie ainsi que toutes ces options(commmandes shell, aide ...)
- * @author 
  *
  */
 public class JeuDeLaVie {

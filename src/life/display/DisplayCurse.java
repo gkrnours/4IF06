@@ -14,7 +14,6 @@ implements Display {
 	protected LIFE data;
 	private Coord origin = null;
 	private Coord span = null;
-	private int i=0;
 	private Integer[] defaut = new Integer[] { 30, 60 };
 	private static String[] utf8 = {" ", "#"};
 
@@ -62,8 +61,6 @@ implements Display {
 				}
 			}
 		}
-		csi.print(68, 0, "tour : "+i, CSIColor.BRIGHT_GREEN);
-		i++;
 		csi.refresh();
 	}
 
