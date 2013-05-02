@@ -65,6 +65,13 @@ public class LIFE extends AllLife implements Iterator<LIFE> {
 	}
 	
 	/**
+	 * rapport retourne l'état du life
+	 */
+	public String rapport(){
+		return "Ce LIFE a un comportement hérratique";
+	}
+	
+	/**
 	 * Mise a jour des coordonnees
 	 */
 	private void update() {

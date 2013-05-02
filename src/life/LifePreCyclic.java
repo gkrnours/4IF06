@@ -34,7 +34,7 @@ public class LifePreCyclic extends LIFE {
 			} 
 			else {
 				if(history.size() == 1){ // alors on a un stable
-					return new LifeCyclicStable(raw);
+					return new LifeStable(raw);
 				}
 				if (origin_x == x && origin_y == y) {
 					return new LifeCyclic(raw, history);

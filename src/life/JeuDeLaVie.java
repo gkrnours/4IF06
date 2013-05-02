@@ -97,6 +97,20 @@ public class JeuDeLaVie {
 	}
 	
 	/**
+	 * Calcul l'évolution d'une position donnée
+	 */
+	public static void calculate(final Integer max, String filename){
+		LIFE life = Loader.read(filename);
+		for(int i=0; 
+				i<max && life.hasNext() && !(life instanceof Asymptotique);
+				++i)
+		{
+			life = life.next();
+		}
+		System.out.println(life.rapport());
+	}
+	
+	/**
 	 * Main
 	 * @param args
 	 */
@@ -105,15 +119,15 @@ public class JeuDeLaVie {
 			help();
 			System.exit(1);
 		}
+		Integer max = Integer.parseInt(args[1]);
 		switch(args[0]){
 		case "-name": name(); break;
 		case "-s": // Run for X turn
 			engine = DisplaySwingTerm.class;
-			Integer max = Integer.parseInt(args[1]);
 			simulate(max, args[2]); 
 			break;
 		case "-c": // analyse a setup in X turn or less
-			// TODO analyse file
+			calculate(max, args[2]); 
 			break;
 		case "-w": // analyse all setup in a directory in X turn or less
 			// TODO analyse folder

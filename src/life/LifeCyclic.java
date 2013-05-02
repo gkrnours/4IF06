@@ -7,7 +7,7 @@ import life.cell.Cellule;
  * classe qui determine un cycle non-stable
  *
  */
-public class LifeCyclic extends LIFE {
+public class LifeCyclic extends LIFE implements Asymptotique {
 	private ArrayList<ArrayList<Cellule>> history;
 	private Integer current;
 	private Integer periode;
@@ -17,6 +17,10 @@ public class LifeCyclic extends LIFE {
 		this.history = history;
 		this.current = 0;
 		this.periode = history.size();
+	}
+	
+	public String rapport(){
+		return "Ce LIFE est cyclique de période "+this.periode;
 	}
 
 	public LIFE next(){

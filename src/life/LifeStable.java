@@ -8,10 +8,14 @@ import life.cell.Cellule;
  * @author itzamma
  *
  */
-public class LifeCyclicStable extends LIFE {
+public class LifeStable extends LIFE implements Asymptotique{
 
-	public LifeCyclicStable(ArrayList<Cellule> raw) {
+	public LifeStable(ArrayList<Cellule> raw) {
 		super(raw);
+	}
+	
+	public String rapport(){
+		return "Ce LIFE est stable. Il ne changeras plus.";
 	}
 
 	public boolean hasNext() {
