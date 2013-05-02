@@ -156,7 +156,10 @@ public class JeuDeLaVie {
 			help();
 			System.exit(1);
 		}
-		Integer max = Integer.parseInt(args[1]);
+		Integer max = 0;
+		if(2 <= args.length){
+			max = Integer.parseInt(args[1]);
+		}
 		switch(args[0]){
 		case "-name": name(); break;
 		case "-s": // Run for X turn
